@@ -5,7 +5,7 @@ Repositório do **time 9** do Projeto Integrador III, realizado em 2024 pela uni
 
 ### Membros:
 - Arthur José Silva Maluf - 22005252
-- Guilherme Dallari Vieira Barros - 
+- Guilherme Dallari Vieira Barros - 23012904
 - Leonardo Ferraro Gianfagna - 18174490
 - Nicholas Rey Rocha Tomic - 24018658
 - Nina Fernandes da Cunha Canto - 22012068
