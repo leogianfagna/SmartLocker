@@ -1,9 +1,9 @@
 ---
-name: Responsabilidade de interação
-about: Destinado ao gerente de interação.
+name: Responsabilidade de teste e deploy.
+about: Destinado ao gerente de teste e deploy
 title: ''
 labels: gerência
-assignees: GuilhermeDallarii
+assignees: ArthrM
 
 ---
 

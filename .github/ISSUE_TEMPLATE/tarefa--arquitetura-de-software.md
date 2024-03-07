@@ -1,8 +1,8 @@
 ---
-name: Responsabilidade de interação
-about: Destinado ao gerente de interação.
+name: 'Tarefa: Arquitetura de Software'
+about: Montar arquitetura do sistema.
 title: ''
-labels: gerência
+labels: Arquitetura, to-do
 assignees: GuilhermeDallarii
 
 ---

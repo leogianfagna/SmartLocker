@@ -1,8 +1,8 @@
 ---
-name: Responsabilidade de teste e deploy
-about: Destinado ao gerente de teste e deploy
+name: 'Tarefa: Programação API'
+about: Programação de APIs.
 title: ''
-labels: gerência
+labels: API, to-do
 assignees: ArthrM
 
 ---

@@ -2,7 +2,7 @@
 name: 'Tarefa: Programação geral em Kotlin'
 about: Código em Kotlin
 title: ''
-labels: to-do
+labels: Kotlin, to-do
 assignees: ArthrM, leogianfagna, nicholastomic, ninacanto
 
 ---
