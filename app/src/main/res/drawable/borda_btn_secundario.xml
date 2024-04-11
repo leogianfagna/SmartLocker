@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector android:shape="rectangle" xmlns:android="http://schemas.android.com/apk/res/android">
+    <stoke android:width="7dp" android:color="@color/main_blue"/>
+    <corners android:radius="5dp"/>
+
+</selector>

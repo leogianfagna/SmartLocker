@@ -10,4 +10,5 @@
     <color name="main_blue">#3D96FF</color>
     <color name="main_black">#383636</color>
     <color name="main_red">#FF3D3D</color>
+    <color name="transparente">#00FFFFFF</color>
 </resources>
