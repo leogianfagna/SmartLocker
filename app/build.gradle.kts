@@ -8,6 +8,10 @@ android {
     namespace = "com.projetointegrador.smartlocker"
     compileSdk = 34
 
+    buildFeatures {
+        viewBinding = true
+    }
+
     defaultConfig {
         applicationId = "com.projetointegrador.smartlocker"
         minSdk = 33

@@ -1,10 +1,144 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    tools:viewBindingIgnore="false"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CadastroActivity">
+    tools:context=".CadastroActivity"
+    android:orientation="vertical"
+    android:gravity="center">
+    
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="273dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppinsbold"
+            android:textSize="24dp"
+            android:lineHeight="26dp"
+            android:text="Comece por aqui"
+            android:textColor="@color/main_black"
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/robotoregular"
+            android:textSize="17dp"
+            android:lineHeight="25dp"
+            android:textColor="@color/main_black"
+            android:text="@string/cadastro_campos"
+            android:layout_marginBottom="26dp"/>
+        <androidx.appcompat.widget.AppCompatEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/robotoregular"
+            android:hint="Nome completo"
+            android:textColor="@color/main_black"
+            android:layout_marginBottom="15dp"
+            android:padding="14dp"
+            android:textSize="14dp"
+            android:background="@drawable/borda_edittextfield"/>
+        <androidx.appcompat.widget.AppCompatEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/robotoregular"
+            android:hint="CPF"
+            android:textColor="@color/main_black"
+            android:layout_marginBottom="15dp"
+            android:padding="14dp"
+            android:textSize="14dp"
+            android:inputType="number"
+            android:background="@drawable/borda_edittextfield"/>
+        <androidx.appcompat.widget.AppCompatEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/robotoregular"
+            android:hint="Email"
+            android:textColor="@color/main_black"
+            android:layout_marginBottom="15dp"
+            android:padding="14dp"
+            android:textSize="14dp"
+            android:background="@drawable/borda_edittextfield"/>
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="15dp">
+            <androidx.appcompat.widget.AppCompatEditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/robotoregular"
+                android:hint="Numero de celular"
+                android:textSize="14dp"
+                android:textColor="@color/main_black"
+                android:padding="14dp"
+                android:inputType="phone"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/borda_edittextfield"/>
+            <androidx.appcompat.widget.AppCompatEditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/robotoregular"
+                android:hint="Data de nascimento"
+                android:textColor="@color/main_black"
+                android:padding="14dp"
+                android:textSize="14dp"
+                android:inputType="date"
+                android:background="@drawable/borda_edittextfield"/>
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/robotoregular"
+            android:hint="Crie uma senha"
+            android:layout_marginBottom="15dp"
+            android:padding="14dp"
+            android:textSize="14dp"
+            android:inputType="textPassword"
+            android:textColor="@color/main_black"
+            android:background="@drawable/borda_edittextfield"/>
+        <androidx.appcompat.widget.AppCompatEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/robotoregular"
+            android:hint="Confirme sua senha"
+            android:layout_marginBottom="26dp"
+            android:textColor="@color/main_black"
+            android:padding="14dp"
+            android:textSize="14dp"
+            android:inputType="textPassword"
+            android:background="@drawable/borda_edittextfield"/>
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bordar_btnprincipal"
+            android:textColor="@color/white"
+            android:textSize="17dp"
+            android:fontFamily="@font/robotobold"
+            android:text="Criar conta"
+            android:textAllCaps="false"
+            android:layout_marginBottom="15dp"/>
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/cadastro_tenhoOutraConta"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/cadastro_tenhoOutraConta"
+            android:fontFamily="@font/robotobold"
+            android:textColor="@color/main_blue"/>
+
+
+
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+        
+    
+
+</androidx.appcompat.widget.LinearLayoutCompat>
