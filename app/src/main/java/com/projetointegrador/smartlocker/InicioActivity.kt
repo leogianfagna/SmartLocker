@@ -25,7 +25,7 @@ class InicioActivity : AppCompatActivity() {
         btnCadastro = findViewById(R.id.btnCadastro)
 
         btnCadastro.setOnClickListener {
-            val i = Intent(this, RecuperarSenhaActivity::class.java)
+            val i = Intent(this, CadastroActivity::class.java)
             i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP) // Call Only, if you wants to clears the activity stack else ignore it.
             startActivity(i)
             finish()

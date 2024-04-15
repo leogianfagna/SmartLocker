@@ -17,55 +17,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
-/*class DateInputMask(val input : EditText) {
 
-    fun listen() {
-        input.addTextChangedListener(mDateEntryWatcher)
-    }
-
-    private val mDateEntryWatcher = object : TextWatcher {
-
-        var edited = false
-        val dividerCharacter = "/"
-
-        override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-            if (edited) {
-                edited = false
-                return
-            }
-
-            var working = getEditText()
-
-            working = manageDateDivider(working, 2, start, before)
-            working = manageDateDivider(working, 5, start, before)
-
-            edited = true
-            input.setText(working)
-            input.setSelection(input.text.length)
-        }
-
-        private fun manageDateDivider(working: String, position : Int, start: Int, before: Int) : String{
-            if (working.length == position) {
-                return if (before <= position && start < position)
-                    working + dividerCharacter
-                else
-                    working.dropLast(1)
-            }
-            return working
-        }
-
-        private fun getEditText() : String {
-            return if (input.text.length >= 10)
-                input.text.toString().substring(0,10)
-            else
-                input.text.toString()
-        }
-
-        override fun afterTextChanged(s: Editable) {}
-        override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
-    }
-}
-*/
 class CadastroActivity : AppCompatActivity() {
     private lateinit var binding: ActivityCadastroBinding
     private val auth = FirebaseAuth.getInstance()
@@ -80,12 +32,45 @@ class CadastroActivity : AppCompatActivity() {
             insets
         }
 
-
-
         binding = ActivityCadastroBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        binding.cadastroEditTextDataNasc.addTextChangedListener(object : TextWatcher{
 
+            var sb : StringBuilder = StringBuilder("")
+
+            var _ignore = false
+
+            override fun afterTextChanged(s: Editable?) {}
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+
+                if(_ignore){
+                    _ignore = false
+                    return
+                }
+
+                sb.clear()
+                sb.append(if(s!!.length > 10){ s.subSequence(0,10) }else{ s })
+
+                if(sb.lastIndex == 2){
+                    if(sb[2] != '/'){
+                        sb.insert(2,"/")
+                    }
+                } else if(sb.lastIndex == 5){
+                    if(sb[5] != '/'){
+                        sb.insert(5,"/")
+                    }
+                }
+
+                _ignore = true
+                binding.cadastroEditTextDataNasc.setText(sb.toString())
+                binding.cadastroEditTextDataNasc.setSelection(sb.length)
+
+            }
+        })
 
         binding.cadastroTenhoOutraConta.setOnClickListener {
             val i = Intent(this, InicioActivity::class.java)
