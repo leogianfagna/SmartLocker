@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">smartlocker</string>
+    <string name="cadastro_tenhoOutraConta"><u>Tenho uma conta</u></string>
+    <string name="cadastro_campos">Preencha <b><u>todos</u></b> os campos</string>
+    <string name="recuperar_campoEmail">Digite o <b><u>email</u></b> utilizado no cadastro para recuperar sua senha</string>
+    <string name="recuperar_voltarLogin"><u>Voltar para Login</u></string>
+    <string name="recuperar_voltarCadastro"><u>Voltar para Cadastro</u></string>
 </resources>
