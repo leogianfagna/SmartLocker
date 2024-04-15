@@ -37,6 +37,7 @@
             android:layout_marginBottom="26dp"/>
 
         <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/recuperar_editTextEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/robotoregular"
@@ -47,6 +48,7 @@
             android:textColor="@color/main_black"
             android:background="@drawable/borda_edittextfield"/>
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/recuperar_btnRecuperar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/bordar_btnprincipal"
