@@ -15,7 +15,7 @@
 
     <!-- Estilos para os inputs que entram dados -->
     <!-- Usaremos para AppCompatEditText -->
-    <style name="ImputFormStyle" parent="Widget.AppCompat.EditText">
+    <style name="InputFormStyle" parent="Widget.AppCompat.EditText">
         <item name="android:fontFamily">@font/robotoregular</item>
         <item name="android:textColorHint">#4D000000</item>
         <item name="android:textSize">14sp</item>
