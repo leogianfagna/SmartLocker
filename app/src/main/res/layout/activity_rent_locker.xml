@@ -54,23 +54,24 @@
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:layout_gravity="center_vertical"
+                android:layout_marginTop="30dp">
 
                 <ImageView
                     android:layout_width="30dp"
                     android:layout_height="match_parent"
-                    android:layout_gravity="fill_vertical"
                     android:src="@drawable/icon_money"
-                    android:scaleType="fitCenter"/>
+                    android:alpha="0.4" />
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="26dp"
                     android:textSize="18sp"
                     android:textStyle="bold"
                     android:text="Valores por hora:"
                     android:fontFamily="@font/poppinsbold"
+                    android:layout_marginStart="5dp"
+                    android:textAlignment="center"
                     android:textColor="#383636" />
 
             </androidx.appcompat.widget.LinearLayoutCompat>
@@ -79,7 +80,8 @@
             <TableLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:stretchColumns="*">
+                android:stretchColumns="*"
+                android:layout_marginTop="20dp">
 
                 <TableRow>
                     <TextView
@@ -143,19 +145,20 @@
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:layout_gravity="center_vertical"
+                android:layout_marginTop="20dp">
 
                 <ImageView
                     android:layout_width="30dp"
                     android:layout_height="match_parent"
-                    android:layout_gravity="fill_vertical"
                     android:src="@drawable/icon_danger"
-                    android:scaleType="fitCenter"/>
+                    android:alpha="0.65"/>
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
+                    android:layout_height="26dp"
+                    android:layout_marginStart="5dp"
+                    android:textAlignment="center"
                     android:textSize="18sp"
                     android:textStyle="bold"
                     android:text="Aviso de atenção"
@@ -167,9 +170,10 @@
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
                 android:textSize="12sp"
                 android:text="Ao alugar o espaço, será cobrado o valor da diária como forma de caução. A diferença será estornada na hora do checkout."
-                android:fontFamily="@font/robotoregular"
+                android:fontFamily="@font/robotomedium"
                 android:textColor="#383636"/>
 
             <!-- Labels de inserção de dados -->
