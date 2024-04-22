@@ -42,7 +42,7 @@ class RecuperarSenhaActivity : AppCompatActivity() {
 
                 }
             }else{
-                binding.recuperarEditTextEmail.setError("Preencha o campo")
+                binding.recuperarEditTextEmail.error = "Preencha o campo"
             }
         }
     }
