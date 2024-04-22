@@ -55,6 +55,7 @@
             android:gravity="center">
 
             <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnLogin"
                 android:layout_width="132dp"
                 android:layout_height="51dp"
                 android:text="Login"
@@ -78,6 +79,7 @@
             android:layout_marginTop="15dp">
 
             <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/inicio_ContaVisitanteTV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/inicio_visitante"
