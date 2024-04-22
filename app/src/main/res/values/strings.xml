@@ -7,4 +7,7 @@
     <string name="recuperar_voltarLogin"><u>Voltar para Login</u></string>
     <string name="recuperar_voltarCadastro"><u>Voltar para Cadastro</u></string>
     <string name="spinner_hint">Selecione uma opção</string>
+    <string name="recover_title"><b>Digite o código</b></string>
+    <string name="recover_text">Enviamos para seu <b><u>email</u></b> um código de recuperação de conta </string>
+    <string name="recover_resend"><u>Não recebi código</u></string>
 </resources>

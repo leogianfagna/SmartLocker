@@ -13,6 +13,9 @@
         android:theme="@style/Theme.smartlocker"
         tools:targetApi="31">
         <activity
+            android:name=".RecoverActivity"
+            android:exported="false" />
+        <activity
             android:name=".RentLockerActivity"
             android:exported="false" />
         <activity
