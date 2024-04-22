@@ -26,6 +26,12 @@ class InicioActivity : AppCompatActivity() {
         binding = ActivityInicioBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        binding.btnCadastro.setOnClickListener {
+            val i = Intent(this, CadastroActivity::class.java)
+            startActivity(i)
+
+        }
+
 
 
 
