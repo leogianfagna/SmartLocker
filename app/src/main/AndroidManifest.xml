@@ -22,9 +22,6 @@
             android:name=".CadastroActivity"
             android:exported="false" />
         <activity
-            android:name=".LoginActivity"
-            android:exported="false" />
-        <activity
             android:name=".InicioActivity"
             android:exported="true">
             <intent-filter>
