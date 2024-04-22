@@ -29,6 +29,7 @@
             />
 
         <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/gerarqrcode_ImageView"
             android:layout_width="273dp"
             android:layout_height="300dp"/>
 
