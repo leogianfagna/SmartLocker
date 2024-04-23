@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ChangeActivity">
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/appCompatTextView3"
+        style="@style/mainTitle"
+        android:layout_width="332dp"
+        android:layout_height="57dp"
+        android:lineHeight="26dp"
+        android:text="Adicione um cartão de crédito"
+        tools:layout_editor_absoluteX="39dp"
+        tools:layout_editor_absoluteY="85dp" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/appCompatTextView5"
+            style="@style/subTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/cadastro_campos"
+            app:layout_constraintStart_toStartOf="@+id/appCompatTextView3"
+            app:layout_constraintTop_toBottomOf="@+id/appCompatTextView3" />
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="333dp"
+        android:layout_height="360dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="185dp">
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/recuperar_editTextEmail"
+            style="@style/InputFormStyle"
+            android:layout_width="335dp"
+            android:layout_height="43.87dp"
+            android:layout_marginTop="12dp"
+            android:height="40dp"
+            android:background="@drawable/contorno_edittextfield"
+            android:hint="Número do cartão"
+            android:padding="14dp"
+            android:textColor="@color/main_black"
+            android:textSize="14dp"
+            app:layout_constraintStart_toStartOf="@+id/appCompatTextView5"
+            app:layout_constraintTop_toBottomOf="@+id/appCompatTextView5" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/recuperar_editTextEmail"
+            style="@style/InputFormStyle"
+            android:layout_width="335dp"
+            android:layout_height="43.87dp"
+            android:height="40dp"
+            android:background="@drawable/contorno_edittextfield"
+            android:hint="CPF"
+            android:padding="14dp"
+            android:textColor="@color/main_black"
+            android:textSize="14dp"
+            app:layout_constraintEnd_toEndOf="@+id/appCompatTextView3"
+            app:layout_constraintStart_toStartOf="@+id/appCompatTextView3"
+            tools:layout_editor_absoluteY="391dp" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/recuperar_editTextEmail"
+            style="@style/InputFormStyle"
+            android:layout_width="335dp"
+            android:layout_height="43.87dp"
+            android:height="40dp"
+            android:background="@drawable/contorno_edittextfield"
+            android:hint="CVV"
+            android:padding="14dp"
+            android:textColor="@color/main_black"
+            android:textSize="14dp"
+            app:layout_constraintStart_toStartOf="@+id/recuperar_editTextEmail"
+            tools:layout_editor_absoluteY="326dp" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/recuperar_editTextEmail"
+            style="@style/InputFormStyle"
+            android:layout_width="335dp"
+            android:layout_height="43.87dp"
+            android:height="40dp"
+            android:background="@drawable/contorno_edittextfield"
+            android:hint="Data de validade"
+            android:padding="14dp"
+            android:textColor="@color/main_black"
+            android:textSize="14dp"
+            app:layout_constraintEnd_toEndOf="@+id/appCompatTextView3"
+            tools:layout_editor_absoluteY="326dp" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/recuperar_editTextEmail"
+            style="@style/InputFormStyle"
+            android:layout_width="335dp"
+            android:layout_height="43.87dp"
+            android:height="40dp"
+            android:background="@drawable/contorno_edittextfield"
+            android:hint="Nome no cartão"
+            android:padding="14dp"
+            android:textColor="@color/main_black"
+            android:textSize="14dp"
+            app:layout_constraintEnd_toEndOf="@+id/appCompatTextView3"
+            app:layout_constraintStart_toStartOf="@+id/appCompatTextView3"
+            tools:layout_editor_absoluteY="263dp" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/recuperar_btnRecuperar"
+            style="@style/btnPrimary"
+            android:layout_width="335dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/contorno_btnprincipal"
+            android:fontFamily="@font/robotobold"
+            android:text="Confirmar dados"
+            android:textColor="@color/white"
+            android:textSize="17dp"
+            tools:layout_editor_absoluteX="37dp"
+            tools:layout_editor_absoluteY="487dp" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        style="@style/btnHyperLink"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/cancelar_cartao"
+        tools:layout_editor_absoluteX="177dp"
+        tools:layout_editor_absoluteY="562dp" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
