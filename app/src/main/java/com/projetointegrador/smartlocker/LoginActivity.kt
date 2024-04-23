@@ -7,18 +7,19 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.projetointegrador.smartlocker.databinding.ActivityLoginBinding
+import android.widget.Toast
+import android.widget.Toast.LENGTH_SHORT
 
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginBinding
-    private lateinit var snackbar: Snackbar
 
     private val auth = FirebaseAuth.getInstance()
     private val db = Firebase.firestore
@@ -51,35 +52,47 @@ class LoginActivity : AppCompatActivity() {
             finish()
         }
 
-        // Acessar como visitante
+        // Acessar como visitante (modo anônimo no Auth)
         binding.btnVisitante.setOnClickListener {
-            // val activityIniciada = Intent(this, RecuperarSenhaActivity::class.java)
-            // startActivity(activityIniciada)
 
-            // TODO: Implementar!
-            snackbar = Snackbar.make(it, "Essa opção está indisponível no momento", Snackbar.LENGTH_SHORT)
-            snackbar.show()
-            finish()
-        }
-
-        // Botão de logar
-        binding.btnLogar.setOnClickListener {
-            // Informações preenchidas nos labels
-            val inputEmail = binding.cpfInput.text.toString()
-            val inputPassword = binding.passInput.text.toString()
-
-            auth.signInWithEmailAndPassword(inputEmail, inputPassword)
-                .addOnCompleteListener(this) { task ->
-                    snackbar = if (task.isSuccessful) {
-                        val user = auth.currentUser
-                        Snackbar.make(it, "Usuário autenticado como: ${user?.email}", Snackbar.LENGTH_SHORT)
+            // Logar no modo anônimo do Firebase Auth
+            auth.signInAnonymously()
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        Toast.makeText(this,"Logado no modo anônimo com sucesso!", LENGTH_SHORT).show()
+                        iniciarMainActivity()
                     } else {
-                        Snackbar.make(it, "Não foi possível autenticar", Snackbar.LENGTH_SHORT)
+                        Toast.makeText(this, task.exception!!.message.toString(), LENGTH_SHORT).show()
                     }
                 }
-
-            snackbar = Snackbar.make(it, "Não foi possível autenticar", Snackbar.LENGTH_SHORT)
-            snackbar.show()
         }
+
+        // Botão de logar com email
+        binding.btnLogar.setOnClickListener {
+            // Informações preenchidas nos labels
+            // Método Trim para remover os espaços em brancos se houver
+            val inputEmail : String = binding.emailInput.text.toString().trim{it <= ' '}
+            val inputPassword : String = binding.passInput.text.toString().trim{it <= ' '}
+
+            // Autenticação com Firebase
+            auth.signInWithEmailAndPassword(inputEmail, inputPassword)
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        val firebaseUser: FirebaseUser = task.result!!.user!! // Objeto do tipo task com a propriedade "result" (!! = Forçar que não é nulo)
+
+                        Toast.makeText(this,"Logado com sucesso com o email ${firebaseUser.email}!", LENGTH_SHORT).show()
+                        iniciarMainActivity()
+                    } else {
+                        Toast.makeText(this, task.exception!!.message.toString(), LENGTH_SHORT).show()
+                    }
+                }
+        }
+    }
+
+    // TODO: Implementar a activity correta, pois ainda é inexistente!
+    fun iniciarMainActivity() {
+        val iniciarActivity = Intent(this, CadastroActivity::class.java)
+        startActivity(iniciarActivity)
+        finish()
     }
 }

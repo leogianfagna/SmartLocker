@@ -32,10 +32,10 @@
             style="@style/subTitle" />
 
         <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/cpfInput"
+            android:id="@+id/emailInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="CPF"
+            android:hint="Email"
             style="@style/InputFormStyle" />
 
         <androidx.appcompat.widget.AppCompatEditText
