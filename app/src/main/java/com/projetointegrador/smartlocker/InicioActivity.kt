@@ -29,13 +29,11 @@ class InicioActivity : AppCompatActivity() {
         binding.btnCadastro.setOnClickListener {
             val i = Intent(this, CadastroActivity::class.java)
             startActivity(i)
-
         }
 
-
-
-
-
-
+        binding.btnLogar.setOnClickListener {
+            val j = Intent(this, LoginActivity::class.java)
+            startActivity(j)
+        }
     }
 }
