@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    tools:context=".LoginActivity">
+
+    <!-- View estática para o mapa -->
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.2"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/mapa_teste"
+            android:scaleType="fitXY"/> <!-- Tag usada para ajustar a escala e preencher espaços vazios -->
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <!-- Restante dos elementos da tela em uma view -->
+    <androidx.appcompat.widget.LinearLayoutCompat
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:orientation="vertical"
+        android:layout_margin="30dp">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:text="Unidade - Barão Geraldo 1"
+            android:layout_gravity="center_horizontal"
+            android:fontFamily="@font/poppinsbold"
+            android:textColor="#383636"/>
+
+        <!-- Uma nova view para centralizar os itens de forma menor -->
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="25dp"
+            android:orientation="vertical"
+            android:layout_marginEnd="25dp">
+
+            <!-- Layout para encaixar a imagem na frente -->
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginTop="30dp">
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/icon_money"
+                    android:alpha="0.4" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="26dp"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:text="Valores por hora:"
+                    android:fontFamily="@font/poppinsbold"
+                    android:layout_marginStart="5dp"
+                    android:textAlignment="center"
+                    android:textColor="#383636" />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <!-- Tabela de preços -->
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:stretchColumns="*"
+                android:layout_marginTop="20dp">
+
+                <TableRow>
+                    <TextView
+                        android:text="30 minutos"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:text="R$10,00"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right"/>
+                </TableRow>
+
+                <TableRow>
+                    <TextView
+                        android:text="1 hora"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:text="R$17,50"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right"/>
+                </TableRow>
+
+                <TableRow>
+                    <TextView
+                        android:text="Diária"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:text="R$60,00"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right"/>
+                </TableRow>
+
+                <TableRow>
+                    <TextView
+                        android:text="Pernoite"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:text="R$70,00"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right"/>
+                </TableRow>
+
+            </TableLayout>
+
+            <!-- Layout para encaixar a imagem na frente -->
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginTop="20dp">
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/icon_danger"
+                    android:alpha="0.65"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="26dp"
+                    android:layout_marginStart="5dp"
+                    android:textAlignment="center"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:text="Aviso de atenção"
+                    android:fontFamily="@font/poppinsbold"
+                    android:textColor="#383636"/>
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:textSize="12sp"
+                android:text="Ao alugar o espaço, será cobrado o valor da diária como forma de caução. A diferença será estornada na hora do checkout."
+                android:fontFamily="@font/robotomedium"
+                android:textColor="#383636"/>
+
+            <!-- Labels de inserção de dados -->
+            <Spinner
+                android:id="@+id/spinnerOption"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:prompt="@string/spinner_hint"
+                android:layout_marginTop="10dp"
+                style="@style/InputFormStyle"/>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnConfirmRent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Confirmar locação"
+            android:layout_marginTop="20dp"
+            style="@style/btnPrimary" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/btnBack"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Voltar"
+            android:gravity="center"
+            android:layout_marginTop="13dp"
+            style="@style/btnHyperLink" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</androidx.appcompat.widget.LinearLayoutCompat>
