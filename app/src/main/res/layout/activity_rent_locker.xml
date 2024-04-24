@@ -161,7 +161,7 @@
                     android:textAlignment="center"
                     android:textSize="18sp"
                     android:textStyle="bold"
-                    android:text="Aviso de atenção"
+                    android:text="Atenção"
                     android:fontFamily="@font/poppinsbold"
                     android:textColor="#383636"/>
 
