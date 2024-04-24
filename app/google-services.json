@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "271596263088",
+    "project_id": "projeto-armario-f8f56",
+    "storage_bucket": "projeto-armario-f8f56.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:271596263088:android:488a84a943895ea7748d75",
+        "android_client_info": {
+          "package_name": "com.example.projetoarmariopi3"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCaK1c8esf5891qEK8IYXXIJ_-pxWGtCEM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:271596263088:android:32760146cf95c8e5748d75",
+        "android_client_info": {
+          "package_name": "com.projetointegrador.smartlocker"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCaK1c8esf5891qEK8IYXXIJ_-pxWGtCEM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

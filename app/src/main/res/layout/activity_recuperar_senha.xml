@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    tools:viewBindingIgnore="false"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CadastroActivity"
+    android:orientation="vertical"
+    android:gravity="center">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="273dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:lineHeight="26dp"
+            android:text="Recupere sua senha"
+            style="@style/mainTitle" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/recuperar_campoEmail"
+            android:layout_marginBottom="26dp"
+            style="@style/subTitle" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/recuperar_editTextEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Email"
+            android:layout_marginBottom="15dp"
+            android:padding="14dp"
+            android:textSize="14dp"
+            android:textColor="@color/main_black"
+            android:background="@drawable/contorno_edittextfield"
+            style="@style/InputFormStyle" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/recuperar_btnRecuperar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/contorno_btnprincipal"
+            android:textColor="@color/white"
+            android:textSize="17dp"
+            android:fontFamily="@font/robotobold"
+            android:text="Recuperar senha"
+            android:layout_marginBottom="15dp"
+            style="@style/btnPrimary" />
+
+        <com.google.android.material.circularreveal.CircularRevealGridLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/recuperar_voltarLogin"
+                style="@style/btnHyperLink" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:text="@string/recuperar_voltarCadastro"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:layout_editor_absoluteY="0dp"
+                style="@style/btnHyperLink" />
+
+        </com.google.android.material.circularreveal.CircularRevealGridLayout>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</androidx.appcompat.widget.LinearLayoutCompat>

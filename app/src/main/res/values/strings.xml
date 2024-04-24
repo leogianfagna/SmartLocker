@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">smartlocker</string>
+    <string name="inicio_visitante"><u>Acessar como visitante</u></string>
+    <string name="cadastro_tenhoOutraConta"><u>Tenho uma conta</u></string>
+    <string name="cadastro_campos">Preencha <b><u>todos</u></b> os campos</string>
+    <string name="recuperar_campoEmail">Digite o <b><u>email</u></b> utilizado no cadastro para recuperar sua senha</string>
+    <string name="recuperar_voltarLogin"><u>Voltar para Login</u></string>
+    <string name="recuperar_voltarCadastro"><u>Voltar para Cadastro</u></string>
+    <string name="spinner_hint">Selecione uma opção</string>
+
+    <string-array name="spinner_opcoes_valores_string">
+        <item>Selecione a opção</item>
+        <item>30 minutos</item>
+        <item>1 hora</item>
+        <item>Diária</item>
+        <item>Pernoite</item>
+    </string-array>
+</resources>

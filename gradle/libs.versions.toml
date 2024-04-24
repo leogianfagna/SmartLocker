@@ -1,0 +1,61 @@
+[versions]
+agp = "8.3.2"
+kotlin = "1.9.23"
+coreKtx = "1.13.0"
+junit = "4.13.2"
+junitVersion = "1.1.5"
+espressoCore = "3.5.1"
+appcompat = "1.6.1"
+material = "1.11.0"
+activity = "1.9.0"
+constraintlayout = "2.1.4"
+playServicesMaps = "18.2.0"
+room = "2.6.1"
+ksp = "1.9.0-1.0.13"
+firebase-bom = "32.8.1"
+google-services = "4.4.1"
+
+
+[libraries]
+firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.ref = "firebase-bom" }
+firebase-analytics = { group = "com.google.firebase", name = "firebase-analytics" }
+firebase-auth = { group = "com.google.firebase", name = "firebase-auth-ktx" }
+firebase-storage = { group = "com.google.firebase", name = "firebase-storage-ktx" }
+firebase-crashlytics = { group = "com.google.firebase", name = "firebase-crashlytics-ktx" }
+firebase-config = { group = "com.google.firebase", name = "firebase-config-ktx" }
+firebase-firestore = { group = "com.google.firebase", name = "firebase-firestore" }
+
+room-ktx = { module = "androidx.room:room-ktx", version.ref = "room" }
+room-paging = { module = "androidx.room:room-paging", version.ref = "room" }
+room-runtime = { module = "androidx.room:room-runtime", version.ref = "room" }
+room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
+androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+junit = { group = "junit", name = "junit", version.ref = "junit" }
+androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
+androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
+androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+material = { group = "com.google.android.material", name = "material", version.ref = "material" }
+androidx-activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
+androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
+play-services-maps = { group = "com.google.android.gms", name = "play-services-maps", version.ref = "playServicesMaps" }
+
+[bundles]
+room = ["room-ktx", "room-paging", "room-runtime"]
+firebase = [
+    "firebase-analytics",
+    "firebase-auth",
+    "firebase-storage",
+    "firebase-crashlytics",
+    "firebase-config",
+    "firebase-firestore"
+]
+
+
+[plugins]
+androidApplication = { id = "com.android.application", version.ref = "agp" }
+jetbrainsKotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+google-services = { id = "com.google.gms.google-services", version.ref = "google-services" }
+
+ksp = {id = "com.google.devtools.ksp", version.ref = "ksp"}
+
+
