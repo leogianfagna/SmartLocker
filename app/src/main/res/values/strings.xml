@@ -11,4 +11,5 @@
     <string name="recover_title"><b>Digite o código</b></string>
     <string name="recover_text">Enviamos para seu <b><u>email</u></b> um código de recuperação de conta </string>
     <string name="recover_resend"><u>Não recebi código</u></string>
+    <string name="cadastro_cartao">Para terminar a compra, preencha <b><u>todos</u></b> os campos</string>
 </resources>
