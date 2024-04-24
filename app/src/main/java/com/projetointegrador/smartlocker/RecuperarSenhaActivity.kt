@@ -16,34 +16,46 @@ class RecuperarSenhaActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityRecuperarSenhaBinding
     private val auth = FirebaseAuth.getInstance()
-    private val db = Firebase.firestore
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_recuperar_senha)
+        binding = ActivityRecuperarSenhaBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
 
-        binding = ActivityRecuperarSenhaBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
         binding.recuperarBtnRecuperar.setOnClickListener {
             val email = binding.recuperarEditTextEmail.text.toString()
-            if (!binding.recuperarEditTextEmail.text?.isEmpty()!!){
-                auth.sendPasswordResetEmail(email).addOnSuccessListener {
-                    Toast.makeText(this@RecuperarSenhaActivity,  "Sucesso", Toast.LENGTH_LONG).show()
-                }.addOnFailureListener {
-                    Toast.makeText(this@RecuperarSenhaActivity,  "Erro", Toast.LENGTH_LONG).show()
-
-                }
-            }else{
-                binding.recuperarEditTextEmail.setError("Preencha o campo")
+            if (email.isNotEmpty()) {
+                recoverPassword(email)
+            } else {
+                Toast.makeText(this, "Por favor, insira o e-mail", Toast.LENGTH_SHORT).show()
             }
         }
+
+        // Botão de voltar para a tela de login
+        binding.recuperarVoltarLogin.setOnClickListener {
+            finish()
+        }
+
+        // Botão de voltar para a tela de cadastro
+        binding.recuperarVoltarCadastro.setOnClickListener {
+            finish()
+        }
+    }
+
+    private fun recoverPassword(email: String) {
+        auth.sendPasswordResetEmail(email)
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    Toast.makeText(this, "E-mail de recuperação de senha enviado", Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(this, "Erro ao enviar e-mail de recuperação de senha", Toast.LENGTH_SHORT).show()
+                }
+            }
     }
 }

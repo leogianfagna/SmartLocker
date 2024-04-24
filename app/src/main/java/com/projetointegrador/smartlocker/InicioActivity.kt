@@ -7,10 +7,11 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.projetointegrador.smartlocker.databinding.ActivityInicioBinding
 
 class InicioActivity : AppCompatActivity() {
 
-    private lateinit var btnCadastro: Button
+    private lateinit var binding: ActivityInicioBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,13 +23,17 @@ class InicioActivity : AppCompatActivity() {
             insets
         }
 
-        btnCadastro = findViewById(R.id.btnCadastro)
+        binding = ActivityInicioBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        btnCadastro.setOnClickListener {
+        binding.btnCadastro.setOnClickListener {
             val i = Intent(this, CadastroActivity::class.java)
-            i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP) // Call Only, if you wants to clears the activity stack else ignore it.
             startActivity(i)
-            finish()
+        }
+
+        binding.btnLogar.setOnClickListener {
+            val j = Intent(this, LoginActivity::class.java)
+            startActivity(j)
         }
     }
 }
