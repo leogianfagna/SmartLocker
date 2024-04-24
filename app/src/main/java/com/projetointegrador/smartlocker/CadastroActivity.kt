@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
-import android.view.View
 import android.widget.EditText
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -36,82 +35,7 @@ class CadastroActivity : AppCompatActivity() {
         binding = ActivityCadastroBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        setupDateInput(binding.cadastroEditTextDataNasc)
-
-        binding.cadastroTenhoOutraConta.setOnClickListener {
-            val i = Intent(this, InicioActivity::class.java)
-            startActivity(i)
-            finish()
-        }
-
-
-
-        binding.btnCriarConta.setOnClickListener {
-
-            val nome: String = binding.cadastroEditTextNome.text.toString()
-            val cpf:String = binding.cadastroEditTextCPF.text.toString()
-            val email:String = binding.cadastroEditTextEmail.text.toString()
-            val celular:String = binding.cadastroEditTextCelular.text.toString()
-            val dataNasc:String = binding.cadastroEditTextDataNasc.text.toString()
-            val senha:String = binding.cadastroEditTextCriarSenha.text.toString()
-            val confSenha:String = binding.cadastroEditTextConfirmeSenha.text.toString()
-
-            if (nome.isNotEmpty() && cpf.isNotEmpty() && email.isNotEmpty()
-                && email.isNotEmpty() && celular.isNotEmpty() && dataNasc.isNotEmpty()
-                && senha.isNotEmpty() && confSenha.isNotEmpty()){
-                if (senha == confSenha){ criarConta(nome, cpf, email, celular, dataNasc, senha, confSenha, it) }
-                else{
-                    binding.cadastroEditTextConfirmeSenha.setError("Confirme se as senhas está corretas")
-                    binding.cadastroEditTextCriarSenha.setError("Confirme se a senhas está corretas")
-                }
-            }
-            else{
-                if (nome.isEmpty()){binding.cadastroEditTextNome.setError("Coloque seu nome") }
-                if (cpf.isEmpty()){binding.cadastroEditTextCPF.setError("Coloque seu cpf") }
-                if (email.isEmpty()){binding.cadastroEditTextEmail.setError("Coloque seu email") }
-                if (celular.isEmpty()){binding.cadastroEditTextCelular.setError("Coloque seu celular") }
-                if (dataNasc.isEmpty()){binding.cadastroEditTextDataNasc.setError("Coloque sua data de nascimento") }
-                if (senha.isEmpty()){binding.cadastroEditTextCriarSenha.setError("Coloque sua senha") }
-                if (confSenha.isEmpty()){binding.cadastroEditTextConfirmeSenha.setError("Coloque sua senha") }
-            }
-        }
-    }
-
-    private fun criarConta(nome: String, cpf:String, email: String, celular: String, dataNasc:String, senha:String, confSenha:String, it: View) {
-        lateinit var snackbar: Snackbar
-        auth.createUserWithEmailAndPassword(email, senha)
-            .addOnCompleteListener{ cadastro ->
-                snackbar = Snackbar.make(it, "Conta criada", Snackbar.LENGTH_SHORT)
-                snackbar.show()
-
-                val usuariosMap = hashMapOf(
-                    "nome" to nome,
-                    "cpf" to cpf,
-                    "email" to email,
-                    "cel" to celular,
-                    "dataNasc" to dataNasc,
-                    "cartao" to false
-
-                )
-
-                val userId = FirebaseAuth.getInstance().currentUser!!.uid
-
-                db.collection("usuarios").document(userId)
-                    .set(usuariosMap).addOnSuccessListener {
-                        Log.d("db", "sucesso ao salvar os dados")
-                        print("mensagem sucesso")
-                    }.addOnFailureListener{e ->
-                        Log.w("db", "deu erro ao salvar os dados", e)
-                    }
-            }.addOnFailureListener { excessao ->
-                snackbar = Snackbar.make(it, "Um erro incomum ocorreu!", Snackbar.LENGTH_SHORT)
-                snackbar.show()
-            }
-
-    }
-
-    private fun setupDateInput(textfield: EditText) {
-        textfield.addTextChangedListener(object : TextWatcher{
+        binding.cadastroEditTextDataNasc.addTextChangedListener(object : TextWatcher{
 
             var sb : StringBuilder = StringBuilder("")
 
@@ -147,5 +71,53 @@ class CadastroActivity : AppCompatActivity() {
 
             }
         })
+
+        binding.cadastroTenhoOutraConta.setOnClickListener {
+            val i = Intent(this, InicioActivity::class.java)
+            startActivity(i)
+            finish()
+        }
+
+        binding.btnCriarConta.setOnClickListener {
+
+            val nome = binding.cadastroEditTextNome.text.toString()
+            val cpf = binding.cadastroEditTextCPF.text.toString()
+            val email = binding.cadastroEditTextEmail.text.toString()
+            val celular = binding.cadastroEditTextCelular.text.toString()
+            val dataNasc = binding.cadastroEditTextDataNasc.text.toString()
+            val senha = binding.cadastroEditTextConfirmeSenha.text.toString()
+
+
+
+            lateinit var snackbar: Snackbar
+            auth.createUserWithEmailAndPassword(email, senha)
+                .addOnCompleteListener{ cadastro ->
+                    snackbar = Snackbar.make(it, "Conta criada", Snackbar.LENGTH_SHORT)
+                    snackbar.show()
+                }.addOnFailureListener { excessao ->
+                    snackbar = Snackbar.make(it, "Um erro incomum ocorreu!", Snackbar.LENGTH_SHORT)
+                    snackbar.show()
+                }
+            val usuariosMap = hashMapOf(
+                "nome" to nome,
+                "cpf" to cpf,
+                "email" to email,
+                "cel" to celular,
+                "dataNasc" to dataNasc,
+                "cartao" to false
+
+            )
+
+
+            db.collection("usuarios").document(cpf)
+                .set(usuariosMap).addOnSuccessListener {
+                    Log.d("db", "sucesso ao salvar os dados")
+                    print("mensagem sucesso")
+                }.addOnFailureListener{e ->
+                    Log.w("db", "deu erro ao salvar os dados", e)
+                }
+        }
+
+
     }
 }

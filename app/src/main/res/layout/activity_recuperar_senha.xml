@@ -30,25 +30,16 @@
             style="@style/subTitle" />
 
         <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/recuperarEditTextEmail"
+            android:id="@+id/recuperar_editTextEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Email"
-            android:layout_marginBottom="15dp"
-            android:padding="14dp"
-            android:textSize="14dp"
-            android:textColor="@color/main_black"
-            android:background="@drawable/contorno_edittextfield"
             style="@style/InputFormStyle" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/recuperar_btnRecuperar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/contorno_btnprincipal"
-            android:textColor="@color/white"
-            android:textSize="17dp"
-            android:fontFamily="@font/robotobold"
             android:text="Recuperar senha"
             android:layout_marginBottom="15dp"
             style="@style/btnPrimary" />
@@ -59,14 +50,12 @@
             android:orientation="horizontal">
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/recuperarVoltarLogin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/recuperar_voltarLogin"
                 style="@style/btnHyperLink" />
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/recuperarVoltarCadastro"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
