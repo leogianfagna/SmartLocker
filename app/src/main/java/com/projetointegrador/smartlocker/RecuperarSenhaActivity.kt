@@ -37,7 +37,6 @@ class RecuperarSenhaActivity : AppCompatActivity() {
             }
         }
 
-        // Botão de voltar para a tela de login
         binding.recuperarVoltarLogin.setOnClickListener {
             finish()
         }
@@ -46,6 +45,7 @@ class RecuperarSenhaActivity : AppCompatActivity() {
         binding.recuperarVoltarCadastro.setOnClickListener {
             finish()
         }
+
     }
 
     private fun recoverPassword(email: String) {

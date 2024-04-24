@@ -15,7 +15,7 @@
         android:layout_height="57dp"
         android:layout_marginTop="64dp"
         android:lineHeight="26dp"
-        android:text="Vamos usar um cartão de crédito"
+        android:text="Adicione um cartão de crédito"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -23,9 +23,9 @@
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/appCompatTextView5"
         style="@style/subTitle"
-        android:layout_width="332dp"
-        android:layout_height="46dp"
-        android:text="@string/cadastro_cartao"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/cadastro_campos"
         app:layout_constraintStart_toStartOf="@+id/appCompatTextView3"
         app:layout_constraintTop_toBottomOf="@+id/appCompatTextView3" />
 
