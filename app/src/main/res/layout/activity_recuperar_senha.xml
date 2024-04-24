@@ -30,7 +30,7 @@
             style="@style/subTitle" />
 
         <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/recuperar_editTextEmail"
+            android:id="@+id/recuperarEditTextEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Email"
