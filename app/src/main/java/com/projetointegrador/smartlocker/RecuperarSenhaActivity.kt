@@ -36,6 +36,16 @@ class RecuperarSenhaActivity : AppCompatActivity() {
                 Toast.makeText(this, "Por favor, insira o e-mail", Toast.LENGTH_SHORT).show()
             }
         }
+
+        // Botão de voltar para a tela de login
+        binding.recuperarVoltarLogin.setOnClickListener {
+            finish()
+        }
+
+        // Botão de voltar para a tela de cadastro
+        binding.recuperarVoltarCadastro.setOnClickListener {
+            finish()
+        }
     }
 
     private fun recoverPassword(email: String) {
