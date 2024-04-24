@@ -6,4 +6,5 @@
     <string name="recuperar_campoEmail">Digite o <b><u>email</u></b> utilizado no cadastro para recuperar sua senha</string>
     <string name="recuperar_voltarLogin"><u>Voltar para Login</u></string>
     <string name="recuperar_voltarCadastro"><u>Voltar para Cadastro</u></string>
+    <string name="mapa_finalizarSessao"><u>Finalizar Sessão</u></string>
 </resources>

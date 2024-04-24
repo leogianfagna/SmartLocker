@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:paddingVertical="6dp">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_marginStart="4dp"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvUnidade"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Unidade"
+            style="@style/TextAppearance.AppCompat.Title" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvDisponivel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Indefinido" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnAction"
+        style="@style/btnPrimary"
+        android:layout_width="wrap_content"
+        android:layout_height="38dp"
+        android:layout_gravity="center"
+        android:layout_marginEnd="10dp"
+        android:text="Indefinido" />
+
+</androidx.appcompat.widget.LinearLayoutCompat>
