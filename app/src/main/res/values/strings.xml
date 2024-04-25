@@ -10,6 +10,12 @@
     <string name="value_per_hour">Valores por hora</string>
     <string name="info_warning">Atenção</string>
     <string name="back"><u>Voltar</u></string>
+    <string name="cancelar_cartao"><u>Cancelar</u></string>
+    <string name="recover_title"><b>Digite o código</b></string>
+    <string name="recover_text">Enviamos para seu <b><u>email</u></b> um código de recuperação de conta </string>
+    <string name="recover_resend"><u>Não recebi código</u></string>
+    <string name="cadastro_cartao">Para terminar a compra, preencha <b><u>todos</u></b> os campos</string>
+
 
     <string-array name="spinner_opcoes_valores_string">
         <item>Selecione a opção</item>
