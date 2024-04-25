@@ -91,7 +91,7 @@ class LoginActivity : AppCompatActivity() {
 
     // TODO: Implementar a activity correta, pois ainda é inexistente!
     fun iniciarMainActivity() {
-        val iniciarActivity = Intent(this, RentLockerActivity::class.java)
+        val iniciarActivity = Intent(this, MapsActivity::class.java)
         startActivity(iniciarActivity)
         finish()
     }

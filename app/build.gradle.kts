@@ -57,6 +57,7 @@ dependencies {
     implementation(libs.bundles.firebase)
 
     implementation(libs.play.services.maps)
+    implementation(libs.play.services.location)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -70,5 +71,7 @@ dependencies {
     implementation ("com.google.code.gson:gson:2.10.1")
     implementation("com.google.zxing:core:3.4.1")
     implementation("com.journeyapps:zxing-android-embedded:4.2.0")
+
+    implementation("com.google.android.gms:play-services-maps:18.2.0")
 
 }
