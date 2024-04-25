@@ -75,6 +75,12 @@
     <style name="SpinnerStyle" parent="Widget.AppCompat.Spinner">
         <item name="android:fontFamily">@font/robotobold</item>
         <item name="android:spinnerMode">dropdown</item>
-        <item name="android:textColor">@color/white</item>
+        <item name="android:textColorHint">#4D000000</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:background">@drawable/contorno_spinner</item>
+        <item name="android:layout_marginBottom">15dp</item>
+        <item name="android:padding">14dp</item>
+        <item name="android:popupElevation">12dp</item>
     </style>
+
 </resources>

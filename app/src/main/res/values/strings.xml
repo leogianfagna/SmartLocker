@@ -7,6 +7,9 @@
     <string name="recuperar_voltarLogin"><u>Voltar para Login</u></string>
     <string name="recuperar_voltarCadastro"><u>Voltar para Cadastro</u></string>
     <string name="spinner_hint">Selecione uma opção</string>
+    <string name="value_per_hour">Valores por hora</string>
+    <string name="info_warning">Atenção</string>
+    <string name="back"><u>Voltar</u></string>
 
     <string-array name="spinner_opcoes_valores_string">
         <item>Selecione a opção</item>
