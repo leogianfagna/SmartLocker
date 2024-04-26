@@ -1,10 +1,12 @@
 package com.projetointegrador.smartlocker
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.room.util.findColumnIndexBySuffix
 import com.google.firebase.firestore.FirebaseFirestore
 import com.projetointegrador.smartlocker.databinding.FragmentUnidadeInfoBinding
 
@@ -41,12 +43,9 @@ class UnidadeInfoFragment : Fragment() {
             }
 
         binding.btnBeginRent.setOnClickListener {
-            /*
-            --(COLOCAR ALGUM CHECK PRA VER SE O USUÁRIO JA TEM UM ALUGUEL)
-
-            --INTENT PRA PROX. ATIVIDADE PARA PROSSEGUIR COM O ALUGUEL
-            --FINISH() // VAI DAR CERTO DENTRO DO FRAGMENT?? SÓ DEUS SABE
-            */
+            // Todo: COLOCAR ALGUM CHECK PRA VER SE O USUÁRIO JA TEM UM ALUGUEL
+            val i = Intent(activity, RentLockerActivity(nomeUnidade)::class.java)
+            startActivity(i)
         }
 
         binding.btnVoltar.setOnClickListener {
