@@ -13,6 +13,7 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import android.Manifest
 import android.content.pm.PackageManager
+import android.location.Location
 import android.util.Log
 import android.view.LayoutInflater
 import android.widget.Toast
@@ -39,7 +40,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         enableEdgeToEdge()
         setContentView(R.layout.activity_maps)
 
-        firestore = Firebase.firestore
+        firestore = FirebaseFirestore.getInstance()
 
         val mapFragment = supportFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment
@@ -67,9 +68,9 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         gMap = googleMap
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
             == PackageManager.PERMISSION_GRANTED) {
-            googleMap.isMyLocationEnabled = true
+            gMap.isMyLocationEnabled = true
 
-            fusedLocationClient.lastLocation.addOnSuccessListener { location ->
+            fusedLocationClient.lastLocation.addOnSuccessListener { location : Location? ->
                 if (location != null) {
                     val currentLatLng = LatLng(location.latitude, location.longitude)
                     gMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 14f))
@@ -84,35 +85,44 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                         for (document in result) {
                             val lat = document.getDouble("lat")!!
                             val long = document.getDouble("long")!!
-                            val unidade = document.getString("unidade")!!
-                            val location = LatLng(lat, long)
-                            val marker = gMap.addMarker(MarkerOptions().position(location).title("Unidade $unidade"))
+                            val nome = document.getString("nome")!!
+                            val markerLocation = LatLng(lat, long)
 
-                            val itemContainer = layoutInflater.inflate(R.layout.unidade_container, linearLayout, false)
-
-                            val title = itemContainer.findViewById<androidx.appcompat.widget.AppCompatTextView>(R.id.tvUnidade)
-                            val subtitle = itemContainer.findViewById<androidx.appcompat.widget.AppCompatTextView>(R.id.tvDisponivel)
-                            val button = itemContainer.findViewById<androidx.appcompat.widget.AppCompatButton>(R.id.btnAction)
-
-                            title.text = "Unidade ${document.getString("unidade")}"
-
-                            val disponivel : Boolean = document.getBoolean("disponivel")!!
-
-                            if (!disponivel) {
-                                subtitle.text = "Indisponível"
-                                button.text = "Indisponível"
-                            } else {
-                                subtitle.text = "Disponível"
-                                button.text = "Ir até lá"
-                                button.setOnClickListener {
-                                    val cameraUpdate = CameraUpdateFactory.newLatLngZoom(location, 16f)
-                                    gMap.animateCamera(cameraUpdate)
-                                    marker!!.showInfoWindow()
-
-                                }
+                            val distance = FloatArray(1)
+                            if (location != null) {
+                                Location.distanceBetween(location.latitude, location.longitude, lat, long, distance)
                             }
 
-                            linearLayout.addView(itemContainer)
+                            if(distance[0] / 1000 <= 10) {
+
+                                val marker = gMap.addMarker(MarkerOptions().position(markerLocation).title("Unidade $nome"))
+
+                                val itemContainer = layoutInflater.inflate(R.layout.unidade_container, linearLayout, false)
+
+                                val title = itemContainer.findViewById<androidx.appcompat.widget.AppCompatTextView>(R.id.tvUnidade)
+                                val subtitle = itemContainer.findViewById<androidx.appcompat.widget.AppCompatTextView>(R.id.tvDisponivel)
+                                val button = itemContainer.findViewById<androidx.appcompat.widget.AppCompatButton>(R.id.btnAction)
+
+                                title.text = "Unidade ${document.getString("nome")}"
+
+                                val isClosed : Boolean = document.getBoolean("isClosed")!!
+
+                                if (isClosed) {
+                                    subtitle.text = "Confira os horários de funcionamento"
+                                    button.text = "Fechado"
+                                } else {
+                                    subtitle.text = "Aberto"
+                                    button.text = "Ir até lá"
+                                    button.setOnClickListener {
+                                        val cameraUpdate = CameraUpdateFactory.newLatLngZoom(markerLocation, 16f)
+                                        gMap.animateCamera(cameraUpdate)
+                                        marker!!.showInfoWindow()
+
+                                    }
+                                }
+
+                                linearLayout.addView(itemContainer)
+                            }
                         }
                     }
                     .addOnFailureListener { exception ->
