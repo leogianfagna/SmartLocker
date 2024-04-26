@@ -98,7 +98,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                                 Location.distanceBetween(location.latitude, location.longitude, lat, long, distance)
                             }
 
-                            if(distance[0] / 1000 <= 6.5) {
+                            if(distance[0] / 1000 <= 1000) {
 
                                 val marker = gMap.addMarker(MarkerOptions().position(markerLocation).title("Unidade $nome"))
 
