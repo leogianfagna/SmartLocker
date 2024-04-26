@@ -12,10 +12,12 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.pm.PackageManager
 import android.location.Location
 import android.util.Log
 import android.view.LayoutInflater
+import android.widget.Button
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -66,6 +68,9 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     override fun onMapReady(googleMap: GoogleMap) {
         // Enable My Location layer if permission granted
         gMap = googleMap
+
+
+
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
             == PackageManager.PERMISSION_GRANTED) {
             gMap.isMyLocationEnabled = true
@@ -93,7 +98,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                                 Location.distanceBetween(location.latitude, location.longitude, lat, long, distance)
                             }
 
-                            if(distance[0] / 1000 <= 10) {
+                            if(distance[0] / 1000 <= 6.5) {
 
                                 val marker = gMap.addMarker(MarkerOptions().position(markerLocation).title("Unidade $nome"))
 
@@ -118,6 +123,14 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                                         gMap.animateCamera(cameraUpdate)
                                         marker!!.showInfoWindow()
 
+                                        val unidadeInfoFragment = UnidadeInfoFragment()
+                                        val bundle = Bundle()
+                                        bundle.putString("nomeUnidade", document.id)
+                                        unidadeInfoFragment.arguments = bundle
+
+                                        supportFragmentManager.beginTransaction()
+                                            .add(R.id.main, unidadeInfoFragment)
+                                            .commit()
                                     }
                                 }
 
