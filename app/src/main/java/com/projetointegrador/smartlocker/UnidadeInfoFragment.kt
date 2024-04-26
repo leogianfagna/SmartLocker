@@ -11,6 +11,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.projetointegrador.smartlocker.databinding.FragmentUnidadeInfoBinding
 
 class UnidadeInfoFragment : Fragment() {
+    val bundle = Bundle()
 
     private lateinit var firestore: FirebaseFirestore
     private var _binding: FragmentUnidadeInfoBinding? = null
@@ -44,8 +45,15 @@ class UnidadeInfoFragment : Fragment() {
 
         binding.btnBeginRent.setOnClickListener {
             // Todo: COLOCAR ALGUM CHECK PRA VER SE O USUÁRIO JA TEM UM ALUGUEL
-            val i = Intent(activity, RentLockerActivity(nomeUnidade)::class.java)
-            startActivity(i)
+            //Iniciar activity renlocker
+            activity?.let{
+                //armazenar nome da unidade no bundle
+                bundle.putString("uni", nomeUnidade)
+
+                val intent = Intent(it, RentLockerActivity::class.java)
+                intent.putExtras(bundle)
+                it.startActivity(intent)
+            }
         }
 
         binding.btnVoltar.setOnClickListener {
