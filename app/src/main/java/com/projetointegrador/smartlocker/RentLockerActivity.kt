@@ -21,7 +21,7 @@ import com.google.zxing.qrcode.encoder.QRCode
 import java.lang.Exception
 import kotlin.math.log
 
-class RentLockerActivity(var localizacaoUnidadeAluguel: String) : AppCompatActivity() {
+class RentLockerActivity() : AppCompatActivity() {
 
     private lateinit var binding: ActivityRentLockerBinding
     private lateinit var itemSelecionadoNoSpinner: String
@@ -77,12 +77,19 @@ class RentLockerActivity(var localizacaoUnidadeAluguel: String) : AppCompatActiv
             }
         }
 
+        //Pegar nome da unidade no bundle
+        val bundle = intent.extras
+        var nomeDaLocalizacao = bundle!!.getString("uni", "Default")
+
+        //Colocar nome da unidade no text view
+        binding.rentlockerNomeUnidade.text="Unidade - $nomeDaLocalizacao"
+
         // Confirmar locação
         binding.btnConfirmRent.setOnClickListener {
             if (itemSelecionadoNoSpinner == "Selecione a opção") {
                 Toast.makeText(this, "Você deve preencher uma opção!", LENGTH_SHORT).show()
             } else {
-                registrarLocacaoFirebase(itemSelecionadoNoSpinner, localizacaoUnidadeAluguel)
+                registrarLocacaoFirebase(itemSelecionadoNoSpinner, nomeDaLocalizacao)
             }
         }
     }
