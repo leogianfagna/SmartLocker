@@ -1,5 +1,6 @@
 package com.projetointegrador.smartlocker
 
+import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Color
@@ -48,6 +49,13 @@ class GerarQRcodeActivity : AppCompatActivity() {
 
     }
 
+    override fun onStop() {
+        super.onStop()
+        val i = Intent(this, InicioActivity::class.java)
+        startActivity(i)
+        finish()
+    }
+
     private fun generateQRCode(data: String): Bitmap? {
         val bitMatrix: BitMatrix = try {
             val hints = EnumMap<EncodeHintType, Any>(EncodeHintType::class.java)
@@ -84,4 +92,6 @@ class GerarQRcodeActivity : AppCompatActivity() {
 
         return bitmap
     }
+
+
 }
