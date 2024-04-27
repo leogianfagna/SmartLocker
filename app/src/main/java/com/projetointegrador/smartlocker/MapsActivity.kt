@@ -13,12 +13,15 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import android.Manifest
 import android.annotation.SuppressLint
+import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Location
 import android.util.Log
 import android.view.LayoutInflater
 import android.widget.Button
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -36,6 +39,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     private val LOCATION_PERMISSION_REQUEST_CODE = 1
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private lateinit var firestore: FirebaseFirestore
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,6 +68,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             insets
         }
     }
+
 
     override fun onMapReady(googleMap: GoogleMap) {
         // Enable My Location layer if permission granted
@@ -116,22 +121,39 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                                     subtitle.text = "Confira os horários de funcionamento"
                                     button.text = "Fechado"
                                 } else {
-                                    subtitle.text = "Aberto"
-                                    button.text = "Ir até lá"
-                                    button.setOnClickListener {
-                                        val cameraUpdate = CameraUpdateFactory.newLatLngZoom(markerLocation, 16f)
-                                        gMap.animateCamera(cameraUpdate)
-                                        marker!!.showInfoWindow()
 
-                                        val unidadeInfoFragment = UnidadeInfoFragment()
-                                        val bundle = Bundle()
-                                        bundle.putString("nomeUnidade", document.id)
-                                        unidadeInfoFragment.arguments = bundle
+                                    var tA = document.getDouble("totalArmarios")!!.toInt()
+                                    var disponivel:  Boolean = false
+                                    for (i in 0 until tA){
 
-                                        supportFragmentManager.beginTransaction()
-                                            .add(R.id.main, unidadeInfoFragment)
-                                            .commit()
+                                        if (document.getBoolean("A$i")==false){
+                                            disponivel = true
+                                            break
+                                        }
                                     }
+                                    if (disponivel){
+                                        subtitle.text = "Aberto"
+                                        button.text = "Ir até lá"
+                                        button.setOnClickListener {
+                                            val cameraUpdate = CameraUpdateFactory.newLatLngZoom(markerLocation, 16f)
+                                            gMap.animateCamera(cameraUpdate)
+                                            marker!!.showInfoWindow()
+
+                                            val unidadeInfoFragment = UnidadeInfoFragment()
+                                            val bundle = Bundle()
+                                            bundle.putString("nomeUnidade", document.id)
+                                            unidadeInfoFragment.arguments = bundle
+
+                                            supportFragmentManager.beginTransaction()
+                                                .add(R.id.main, unidadeInfoFragment)
+                                                .commit()
+                                        }
+                                    }else{
+                                        subtitle.text = "Sem armarios disponiveis"
+                                        button.text = "Lotato"
+                                    }
+
+
                                 }
 
                                 linearLayout.addView(itemContainer)
@@ -164,4 +186,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             }
         }
     }
+
+
 }
