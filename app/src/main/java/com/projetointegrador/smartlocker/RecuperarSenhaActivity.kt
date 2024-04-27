@@ -53,6 +53,13 @@ class RecuperarSenhaActivity : AppCompatActivity() {
 
     }
 
+    override fun onStop() {
+        super.onStop()
+        val i = Intent(this, InicioActivity::class.java)
+        startActivity(i)
+        finish()
+    }
+
     private fun recoverPassword(email: String) {
         auth.sendPasswordResetEmail(email)
             .addOnCompleteListener { task ->

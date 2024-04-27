@@ -1,6 +1,9 @@
 package com.projetointegrador.smartlocker
 
+import android.content.Context
 import android.content.Intent
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -48,32 +51,38 @@ class CadastroActivity : AppCompatActivity() {
 
         binding.btnCriarConta.setOnClickListener {
 
-            val nome: String = binding.cadastroEditTextNome.text.toString()
-            val cpf:String = binding.cadastroEditTextCPF.text.toString()
-            val email:String = binding.cadastroEditTextEmail.text.toString()
-            val celular:String = binding.cadastroEditTextCelular.text.toString()
-            val dataNasc:String = binding.cadastroEditTextDataNasc.text.toString()
-            val senha:String = binding.cadastroEditTextCriarSenha.text.toString()
-            val confSenha:String = binding.cadastroEditTextConfirmeSenha.text.toString()
+            if (!isOnline(this)){
+                var snackbar = Snackbar.make(it, "Conecte-se a internet", Snackbar.LENGTH_SHORT)
+                snackbar.show()
+            }else{
+                val nome: String = binding.cadastroEditTextNome.text.toString()
+                val cpf:String = binding.cadastroEditTextCPF.text.toString()
+                val email:String = binding.cadastroEditTextEmail.text.toString()
+                val celular:String = binding.cadastroEditTextCelular.text.toString()
+                val dataNasc:String = binding.cadastroEditTextDataNasc.text.toString()
+                val senha:String = binding.cadastroEditTextCriarSenha.text.toString()
+                val confSenha:String = binding.cadastroEditTextConfirmeSenha.text.toString()
 
-            if (nome.isNotEmpty() && cpf.isNotEmpty() && email.isNotEmpty()
-                && email.isNotEmpty() && celular.isNotEmpty() && dataNasc.isNotEmpty()
-                && senha.isNotEmpty() && confSenha.isNotEmpty()){
-                if (senha == confSenha){ criarConta(nome, cpf, email, celular, dataNasc, senha, confSenha, it) }
+                if (nome.isNotEmpty() && cpf.isNotEmpty() && email.isNotEmpty()
+                    && email.isNotEmpty() && celular.isNotEmpty() && dataNasc.isNotEmpty()
+                    && senha.isNotEmpty() && confSenha.isNotEmpty()){
+                    if (senha == confSenha){ criarConta(nome, cpf, email, celular, dataNasc, senha, confSenha, it) }
+                    else{
+                        binding.cadastroEditTextConfirmeSenha.setError("Confirme se as senhas está corretas")
+                        binding.cadastroEditTextCriarSenha.setError("Confirme se a senhas está corretas")
+                    }
+                }
                 else{
-                    binding.cadastroEditTextConfirmeSenha.setError("Confirme se as senhas está corretas")
-                    binding.cadastroEditTextCriarSenha.setError("Confirme se a senhas está corretas")
+                    if (nome.isEmpty()){binding.cadastroEditTextNome.setError("Coloque seu nome") }
+                    if (cpf.isEmpty()){binding.cadastroEditTextCPF.setError("Coloque seu cpf") }
+                    if (email.isEmpty()){binding.cadastroEditTextEmail.setError("Coloque seu email") }
+                    if (celular.isEmpty()){binding.cadastroEditTextCelular.setError("Coloque seu celular") }
+                    if (dataNasc.isEmpty()){binding.cadastroEditTextDataNasc.setError("Coloque sua data de nascimento") }
+                    if (senha.isEmpty()){binding.cadastroEditTextCriarSenha.setError("Coloque sua senha") }
+                    if (confSenha.isEmpty()){binding.cadastroEditTextConfirmeSenha.setError("Coloque sua senha") }
                 }
             }
-            else{
-                if (nome.isEmpty()){binding.cadastroEditTextNome.setError("Coloque seu nome") }
-                if (cpf.isEmpty()){binding.cadastroEditTextCPF.setError("Coloque seu cpf") }
-                if (email.isEmpty()){binding.cadastroEditTextEmail.setError("Coloque seu email") }
-                if (celular.isEmpty()){binding.cadastroEditTextCelular.setError("Coloque seu celular") }
-                if (dataNasc.isEmpty()){binding.cadastroEditTextDataNasc.setError("Coloque sua data de nascimento") }
-                if (senha.isEmpty()){binding.cadastroEditTextCriarSenha.setError("Coloque sua senha") }
-                if (confSenha.isEmpty()){binding.cadastroEditTextConfirmeSenha.setError("Coloque sua senha") }
-            }
+
         }
     }
 
@@ -147,5 +156,27 @@ class CadastroActivity : AppCompatActivity() {
 
             }
         })
+    }
+
+    private fun isOnline(context: Context): Boolean {
+        val connectivityManager =
+            context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        if (connectivityManager != null) {
+            val capabilities =
+                connectivityManager.getNetworkCapabilities(connectivityManager.activeNetwork)
+            if (capabilities != null) {
+                if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR)) {
+                    Log.i("Internet", "NetworkCapabilities.TRANSPORT_CELLULAR")
+                    return true
+                } else if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)) {
+                    Log.i("Internet", "NetworkCapabilities.TRANSPORT_WIFI")
+                    return true
+                } else if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET)) {
+                    Log.i("Internet", "NetworkCapabilities.TRANSPORT_ETHERNET")
+                    return true
+                }
+            }
+        }
+        return false
     }
 }

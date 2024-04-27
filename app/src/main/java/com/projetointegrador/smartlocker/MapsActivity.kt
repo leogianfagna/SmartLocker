@@ -12,10 +12,16 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import android.Manifest
+import android.annotation.SuppressLint
+import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
+import android.location.Location
 import android.util.Log
 import android.view.LayoutInflater
+import android.widget.Button
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -34,12 +40,13 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private lateinit var firestore: FirebaseFirestore
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_maps)
 
-        firestore = Firebase.firestore
+        firestore = FirebaseFirestore.getInstance()
 
         val mapFragment = supportFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment
@@ -62,14 +69,18 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         }
     }
 
+
     override fun onMapReady(googleMap: GoogleMap) {
         // Enable My Location layer if permission granted
         gMap = googleMap
+
+
+
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
             == PackageManager.PERMISSION_GRANTED) {
-            googleMap.isMyLocationEnabled = true
+            gMap.isMyLocationEnabled = true
 
-            fusedLocationClient.lastLocation.addOnSuccessListener { location ->
+            fusedLocationClient.lastLocation.addOnSuccessListener { location : Location? ->
                 if (location != null) {
                     val currentLatLng = LatLng(location.latitude, location.longitude)
                     gMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 14f))
@@ -84,35 +95,69 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                         for (document in result) {
                             val lat = document.getDouble("lat")!!
                             val long = document.getDouble("long")!!
-                            val unidade = document.getString("unidade")!!
-                            val location = LatLng(lat, long)
-                            val marker = gMap.addMarker(MarkerOptions().position(location).title("Unidade $unidade"))
+                            val nome = document.getString("nome")!!
+                            val markerLocation = LatLng(lat, long)
 
-                            val itemContainer = layoutInflater.inflate(R.layout.unidade_container, linearLayout, false)
-
-                            val title = itemContainer.findViewById<androidx.appcompat.widget.AppCompatTextView>(R.id.tvUnidade)
-                            val subtitle = itemContainer.findViewById<androidx.appcompat.widget.AppCompatTextView>(R.id.tvDisponivel)
-                            val button = itemContainer.findViewById<androidx.appcompat.widget.AppCompatButton>(R.id.btnAction)
-
-                            title.text = "Unidade ${document.getString("unidade")}"
-
-                            val disponivel : Boolean = document.getBoolean("disponivel")!!
-
-                            if (!disponivel) {
-                                subtitle.text = "Indisponível"
-                                button.text = "Indisponível"
-                            } else {
-                                subtitle.text = "Disponível"
-                                button.text = "Ir até lá"
-                                button.setOnClickListener {
-                                    val cameraUpdate = CameraUpdateFactory.newLatLngZoom(location, 16f)
-                                    gMap.animateCamera(cameraUpdate)
-                                    marker!!.showInfoWindow()
-
-                                }
+                            val distance = FloatArray(1)
+                            if (location != null) {
+                                Location.distanceBetween(location.latitude, location.longitude, lat, long, distance)
                             }
 
-                            linearLayout.addView(itemContainer)
+                            if(distance[0] / 1000 <= 1000) {
+
+                                val marker = gMap.addMarker(MarkerOptions().position(markerLocation).title("Unidade $nome"))
+
+                                val itemContainer = layoutInflater.inflate(R.layout.unidade_container, linearLayout, false)
+
+                                val title = itemContainer.findViewById<androidx.appcompat.widget.AppCompatTextView>(R.id.tvUnidade)
+                                val subtitle = itemContainer.findViewById<androidx.appcompat.widget.AppCompatTextView>(R.id.tvDisponivel)
+                                val button = itemContainer.findViewById<androidx.appcompat.widget.AppCompatButton>(R.id.btnAction)
+
+                                title.text = "Unidade ${document.getString("nome")}"
+
+                                val isClosed : Boolean = document.getBoolean("isClosed")!!
+
+                                if (isClosed) {
+                                    subtitle.text = "Confira os horários de funcionamento"
+                                    button.text = "Fechado"
+                                } else {
+
+                                    var tA = document.getDouble("totalArmarios")!!.toInt()
+                                    var disponivel:  Boolean = false
+                                    for (i in 0 until tA){
+
+                                        if (document.getBoolean("A$i")==false){
+                                            disponivel = true
+                                            break
+                                        }
+                                    }
+                                    if (disponivel){
+                                        subtitle.text = "Aberto"
+                                        button.text = "Ir até lá"
+                                        button.setOnClickListener {
+                                            val cameraUpdate = CameraUpdateFactory.newLatLngZoom(markerLocation, 16f)
+                                            gMap.animateCamera(cameraUpdate)
+                                            marker!!.showInfoWindow()
+
+                                            val unidadeInfoFragment = UnidadeInfoFragment()
+                                            val bundle = Bundle()
+                                            bundle.putString("nomeUnidade", document.id)
+                                            unidadeInfoFragment.arguments = bundle
+
+                                            supportFragmentManager.beginTransaction()
+                                                .add(R.id.main, unidadeInfoFragment)
+                                                .commit()
+                                        }
+                                    }else{
+                                        subtitle.text = "Sem armarios disponiveis"
+                                        button.text = "Lotato"
+                                    }
+
+
+                                }
+
+                                linearLayout.addView(itemContainer)
+                            }
                         }
                     }
                     .addOnFailureListener { exception ->
@@ -141,4 +186,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             }
         }
     }
+
+
 }

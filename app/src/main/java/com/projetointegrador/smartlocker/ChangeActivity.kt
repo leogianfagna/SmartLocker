@@ -1,5 +1,6 @@
 package com.projetointegrador.smartlocker
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -39,5 +40,12 @@ class ChangeActivity : AppCompatActivity() {
                     Toast.makeText(this, "Error adding card", Toast.LENGTH_SHORT).show()
                 }
         }
+    }
+
+    override fun onStop() {
+        super.onStop()
+        val i = Intent(this, InicioActivity::class.java)
+        startActivity(i)
+        finish()
     }
 }
