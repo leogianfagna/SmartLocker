@@ -1,19 +1,25 @@
 package com.projetointegrador.smartlocker
 
+import android.content.ContentValues
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.graphics.Point
 import android.os.Bundle
+import android.util.Log
 import android.view.Display
 import android.view.WindowManager
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.collection.LLRBNode
+import com.google.firebase.firestore.SetOptions
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.EncodeHintType
 import com.google.zxing.MultiFormatWriter
@@ -27,6 +33,8 @@ import java.util.EnumMap
 class GerarQRcodeActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityGerarQrcodeBinding
+    private var appFechado = false
+    private val db = Firebase.firestore
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,9 +59,27 @@ class GerarQRcodeActivity : AppCompatActivity() {
 
     override fun onStop() {
         super.onStop()
+
+        // Usuário fechou o aplicativo durante esse Activity
+        if (!appFechado && isFinishing) {
+
+            // Define as mudanças no campo do Firebase
+            val updates = hashMapOf<String, Any>(
+                "pendencia" to true
+            )
+
+            val userId = FirebaseAuth.getInstance().currentUser!!.uid
+            db.collection("usuarios").document(userId).set(updates, SetOptions.merge())
+        }
+
         val i = Intent(this, InicioActivity::class.java)
         startActivity(i)
         finish()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        appFechado = isFinishing
     }
 
     private fun generateQRCode(data: String): Bitmap? {
@@ -92,6 +118,5 @@ class GerarQRcodeActivity : AppCompatActivity() {
 
         return bitmap
     }
-
 
 }
