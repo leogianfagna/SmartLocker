@@ -1,8 +1,12 @@
 package com.projetointegrador.smartlocker
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -16,6 +20,7 @@ import com.google.firebase.ktx.Firebase
 import com.projetointegrador.smartlocker.databinding.ActivityLoginBinding
 import android.widget.Toast
 import android.widget.Toast.LENGTH_SHORT
+import com.google.android.material.snackbar.Snackbar
 
 class LoginActivity : AppCompatActivity() {
 
@@ -55,16 +60,33 @@ class LoginActivity : AppCompatActivity() {
         // Acessar como visitante (modo anônimo no Auth)
         binding.btnVisitante.setOnClickListener {
 
-            // Logar no modo anônimo do Firebase Auth
-            auth.signInAnonymously()
-                .addOnCompleteListener { task ->
-                    if (task.isSuccessful) {
-                        Toast.makeText(this,"Logado no modo anônimo com sucesso!", LENGTH_SHORT).show()
-                        iniciarMainActivity()
-                    } else {
-                        Toast.makeText(this, task.exception!!.message.toString(), LENGTH_SHORT).show()
+            if (!isOnline(this)){
+                var snackbar = Snackbar.make(it, "Conecte-se a internet", Snackbar.LENGTH_SHORT)
+                snackbar.show()
+            }else{
+                // Logar no modo anônimo do Firebase Auth
+                auth.signInAnonymously()
+                    .addOnCompleteListener { task ->
+                        if (task.isSuccessful) {
+                            val usuariosMap = hashMapOf(
+                                "cartao" to false
+                            )
+                            val userId = FirebaseAuth.getInstance().currentUser!!.uid
+                            db.collection("usuarios").document(userId)
+                                .set(usuariosMap).addOnSuccessListener {
+                                    Log.d("db", "sucesso ao salvar os dados")
+                                    print("mensagem sucesso")
+                                }.addOnFailureListener{e ->
+                                    Log.w("db", "deu erro ao salvar os dados", e)
+                                }
+                            Toast.makeText(this,"Logado no modo anônimo com sucesso!", LENGTH_SHORT).show()
+                            iniciarMainActivity()
+                        } else {
+                            Toast.makeText(this, task.exception!!.message.toString(), LENGTH_SHORT).show()
+                        }
                     }
-                }
+            }
+
         }
 
         // Botão de logar com email
@@ -89,10 +111,32 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
+
     // TODO: Implementar a activity correta, pois ainda é inexistente!
     fun iniciarMainActivity() {
         val iniciarActivity = Intent(this, MapsActivity::class.java)
         startActivity(iniciarActivity)
         finish()
+    }
+    private fun isOnline(context: Context): Boolean {
+        val connectivityManager =
+            context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        if (connectivityManager != null) {
+            val capabilities =
+                connectivityManager.getNetworkCapabilities(connectivityManager.activeNetwork)
+            if (capabilities != null) {
+                if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR)) {
+                    Log.i("Internet", "NetworkCapabilities.TRANSPORT_CELLULAR")
+                    return true
+                } else if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)) {
+                    Log.i("Internet", "NetworkCapabilities.TRANSPORT_WIFI")
+                    return true
+                } else if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET)) {
+                    Log.i("Internet", "NetworkCapabilities.TRANSPORT_ETHERNET")
+                    return true
+                }
+            }
+        }
+        return false
     }
 }
