@@ -111,14 +111,6 @@
             app:layout_constraintStart_toStartOf="@+id/appCompatTextView3"
             tools:layout_editor_absoluteY="263dp" />
 
-        <androidx.appcompat.widget.AppCompatEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="14dp"
-            android:textColor="@color/main_red"
-            android:text="Aviso: Ao alugar o espaço, será cobrado o valor da diária como forma de caução. A diferença será estornada na hora do checkout."
-            android:layout_marginBottom="15dp"/>
-
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnCardConfirm"
             style="@style/btnPrimary"
