@@ -16,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.collection.LLRBNode
 import com.google.firebase.firestore.SetOptions
 import com.google.firebase.firestore.ktx.firestore
@@ -54,7 +55,12 @@ class GerarQRcodeActivity : AppCompatActivity() {
 
         binding.gerarqrcodeImageView.setImageBitmap(generateQRCode(userId))
 
-
+        // Botão de retornar
+        binding.btnBack.setOnClickListener {
+            val iniciarActivity = Intent(this, MapsActivity::class.java)
+            startActivity(iniciarActivity)
+            finish()
+        }
     }
 
     override fun onStop() {
@@ -118,5 +124,4 @@ class GerarQRcodeActivity : AppCompatActivity() {
 
         return bitmap
     }
-
 }

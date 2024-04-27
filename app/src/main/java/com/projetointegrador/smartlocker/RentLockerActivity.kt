@@ -120,7 +120,6 @@ class RentLockerActivity() : AppCompatActivity() {
 
                 } else {
                     Log.d(TAG, "Documento inexistente")
-                    Toast.makeText(this, "Documento inexistente", LENGTH_SHORT).show()
                 }
             }
             .addOnFailureListener { exception ->
@@ -155,7 +154,7 @@ class RentLockerActivity() : AppCompatActivity() {
                             }
                         }
                     } else {
-                        Toast.makeText(this, "Nenhum valor encontrado", LENGTH_SHORT).show()
+                        Log.d(TAG, "Nenhum valor encontrado")
                     }
 
                     // Há disponibilidade, reservar o armário no Firebase
