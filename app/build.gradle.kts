@@ -71,4 +71,11 @@ dependencies {
     implementation("com.journeyapps:zxing-android-embedded:4.3.0")
     implementation("com.google.android.gms:play-services-maps:18.1.0")
 
+    //Api da camera
+    implementation("androidx.camera:camera-camera2:1.3.3")
+    //Controlar ciclo de vida da camera
+    implementation("androidx.camera:camera-lifecycle:1.3.3")
+    //Objeto camera view para visualizar
+    implementation("androidx.camera:camera-view:1.3.3")
+
 }
