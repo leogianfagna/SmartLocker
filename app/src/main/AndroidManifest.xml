@@ -23,6 +23,7 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
+        android:hardwareAccelerated="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
@@ -30,10 +31,11 @@
         android:theme="@style/Theme.smartlocker"
         tools:targetApi="33">
         <activity
+            android:name=".CamPreviewActivity"
+            android:exported="false" />
+        <activity
             android:name=".MapsActivity"
-            android:exported="false">
-
-        </activity>
+            android:exported="false" />
         <activity
             android:name=".ChangeActivity"
             android:exported="false" />
@@ -63,13 +65,11 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyCB_XTyBtzDDOxHUX9rwTcA3vWC0uNHaMw"/>
-
+            android:value="AIzaSyCB_XTyBtzDDOxHUX9rwTcA3vWC0uNHaMw" />
     </application>
 
 </manifest>
