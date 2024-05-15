@@ -38,6 +38,9 @@
             android:name=".ChangeActivity"
             android:exported="false" />
         <activity
+            android:name=".ScanQRcodeActivity"
+            android:exported="false" />
+        <activity
             android:name=".RentLockerActivity"
             android:exported="false" />
         <activity
