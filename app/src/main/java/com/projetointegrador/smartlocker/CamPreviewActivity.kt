@@ -14,15 +14,26 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.google.common.util.concurrent.ListenableFuture
+import com.google.firebase.auth.FirebaseAuth
 import com.projetointegrador.smartlocker.databinding.ActivityCamPreviewBinding
 import java.io.File
 import java.lang.Exception
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
-class CamPreviewActivity : AppCompatActivity() {
+class CamPreviewActivity(): AppCompatActivity() {
 
+/*
+    //CODIGO PARA QUANDO FOR O PRIMEIRO CLIENTE E O SEGUNDO CLIENTE
+
+    val i = Intent(this, CamPreviewActivity::class.java)
+    i.putExtra("numeroCliente", 1) ESTE É PARA O PRIMEIRO CLIENTE
+    i.putExtra("numeroCliente", 2) ESTE É PARA O SEGUNDO CLIENTE
+    startActivity(i)
+*/
     private lateinit var binding: ActivityCamPreviewBinding
+
+    private lateinit var file: File
 
     //Controlar estado do driver da camera
     private lateinit var cameraProviderFuture: ListenableFuture<ProcessCameraProvider>
@@ -37,13 +48,6 @@ class CamPreviewActivity : AppCompatActivity() {
     private lateinit var imgCaptureExecuter: ExecutorService
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContentView(R.layout.activity_cam_preview)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
 
         binding = ActivityCamPreviewBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -54,20 +58,35 @@ class CamPreviewActivity : AppCompatActivity() {
 
         startCAM()
 
+        val int = intent
+
+        val numCliente = int.extras?.getInt("numeroCliente")!!
+
         binding.butao.setOnClickListener {
-            tirarFoto()
+            tirarFoto(numCliente)
         }
     }
 
-    private fun tirarFoto(){
+    private fun tirarFoto(numCliente: Int){
 
 
 
         imageCapture?.let {
 
+            val userId = FirebaseAuth.getInstance().currentUser!!.uid
+
             //nome do arquivo para gravar arquivo
-            val fileName = "JPEG_1"
-            val file = File(externalMediaDirs[0], fileName)
+
+            if (numCliente==1){
+                val fileName = "$userId"
+                file = File(externalMediaDirs[0], fileName)
+            }else if (numCliente==2){
+                val fileName = "${userId}-2"
+                file = File(externalMediaDirs[0], fileName)
+            }
+
+
+
 
             val outputFileOptions =  ImageCapture.OutputFileOptions.Builder(file).build()
 
@@ -76,8 +95,8 @@ class CamPreviewActivity : AppCompatActivity() {
                 imgCaptureExecuter,
                 object : ImageCapture.OnImageSavedCallback{
                     override fun onImageSaved(outputFileResults: ImageCapture.OutputFileResults) {
+                        //COLOCAR CODIGO PARA MUDAR DE ACTIVITY
                         Log.i("Camera", "Image Salva ${file.toURI()}")
-
 
                     }
 
