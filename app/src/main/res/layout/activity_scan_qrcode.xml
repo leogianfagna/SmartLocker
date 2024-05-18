@@ -6,33 +6,71 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ScanQRcodeActivity"
-    android:gravity="center"
     android:orientation="vertical">
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:layout_width="wrap_content"
-        android:textAlignment="center"
-        style="@style/mainTitle"
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="LER QR CODE"
-        android:layout_marginBottom="10dp"/>
+        android:background="@color/main_black"
+        >
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/btn_Voltar"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:background="@drawable/left_arrow"/>
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:layout_width="273dp"
-        android:textAlignment="center"
-        style="@style/subTitle"
-        android:layout_height="wrap_content"
-        android:text="Utilize o smartphone para leitura do QRCode do cliente. Abaixo está um exemplo:"
-        android:layout_marginBottom="10dp"/>
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppinsbold"
+            android:textColor="@color/white"
+            android:textAlignment="center"
+            android:text="LEITURA QRCODE"/>
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:textAlignment="center"
+            style="@style/mainTitle"
+            android:layout_height="wrap_content"
+            android:text="LER QR CODE"
+            android:layout_marginBottom="10dp"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="273dp"
+            android:textAlignment="center"
+            style="@style/subTitle"
+            android:layout_height="wrap_content"
+            android:text="Utilize o smartphone para leitura do QRCode do cliente. Abaixo está um exemplo:"
+            android:layout_marginBottom="10dp"/>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/qr_example"
+            android:layout_marginBottom="15dp"/>
 
 
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/scan_btn"
-        android:layout_width="273dp"
-        android:layout_height="wrap_content"
-        android:text="Leitura de QRcode"
-        style="@style/btnPrimary"/>
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/scan_btn"
+            android:layout_width="273dp"
+            android:layout_height="wrap_content"
+            android:text="Leitura de QRcode"
+            style="@style/btnPrimary"/>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+
 
 
 
