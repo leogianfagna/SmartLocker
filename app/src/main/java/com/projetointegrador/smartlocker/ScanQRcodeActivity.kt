@@ -29,6 +29,9 @@ class ScanQRcodeActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
+        binding.btnVoltar.setOnClickListener {
+            finish()
+        }
         binding.scanBtn.setOnClickListener{
             onButtonClick(view)
         }
