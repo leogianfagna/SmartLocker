@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.projetointegrador.smartlocker.databinding.ActivityCadastroBinding
@@ -32,9 +33,26 @@ class RecuperarSenhaActivity : AppCompatActivity() {
         binding.recuperarBtnRecuperar.setOnClickListener {
             val email = binding.recuperarEditTextEmail.text.toString()
             if (email.isNotEmpty()) {
-                recoverPassword(email)
+                val db = FirebaseFirestore.getInstance()
+                db.collection("usuarios").whereEqualTo("email", email).get()
+                    .addOnSuccessListener { documents ->
+                        if (documents.isEmpty) {
+                            Toast.makeText(this, "Este email não está registrado.", Toast.LENGTH_SHORT).show()
+                        } else {
+                            auth.sendPasswordResetEmail(email).addOnCompleteListener { task ->
+                                if (task.isSuccessful) {
+                                    Toast.makeText(this, "Email de recuperação de senha enviado.", Toast.LENGTH_SHORT).show()
+                                } else {
+                                    Toast.makeText(this, "Erro ao enviar email de recuperação de senha.", Toast.LENGTH_SHORT).show()
+                                }
+                            }
+                        }
+                    }
+                    .addOnFailureListener { exception ->
+                        Toast.makeText(this, "Erro ao verificar o email.", Toast.LENGTH_SHORT).show()
+                    }
             } else {
-                Toast.makeText(this, "Por favor, insira o e-mail", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Por favor, insira seu email.", Toast.LENGTH_SHORT).show()
             }
         }
 
