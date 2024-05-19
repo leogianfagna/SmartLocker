@@ -37,7 +37,6 @@ class CamPreviewActivity(): AppCompatActivity() {
 
     //Controlar estado do driver da camera
     private lateinit var cameraProviderFuture: ListenableFuture<ProcessCameraProvider>
-    //Selecionar camera
 
     //Imagem capturada
     private lateinit var cameraSelector: CameraSelector
