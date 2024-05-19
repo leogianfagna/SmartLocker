@@ -9,6 +9,7 @@
     <string name="spinner_hint">Selecione uma opção</string>
     <string name="value_per_hour">Valores por hora</string>
     <string name="info_warning">Atenção</string>
+    <string name="info_warning_text">Ao alugar o espaço, será cobrado o valor de uma diária como forma de caução. A diferença será estornada na hora do checkout. A opção de diária poderá ser selecionada somente entre 7h e 8h da manhã.</string>
     <string name="back"><u>Voltar</u></string>
     <string name="cancelar_cartao"><u>Cancelar</u></string>
     <string name="recover_title"><b>Digite o código</b></string>
@@ -21,8 +22,8 @@
         <item>Selecione a opção</item>
         <item>30 minutos</item>
         <item>1 hora</item>
+        <item>4 horas</item>
         <item>Diária</item>
-        <item>Pernoite</item>
     </string-array>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
