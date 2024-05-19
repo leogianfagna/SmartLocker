@@ -40,6 +40,9 @@ class CadastroActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         setupDateInput(binding.cadastroEditTextDataNasc)
+        setupCPFInput(binding.cadastroEditTextCPF)
+        setupPhoneNumberInput(binding.cadastroEditTextCelular)
+
 
         binding.cadastroTenhoOutraConta.setOnClickListener {
             val i = Intent(this, InicioActivity::class.java)
@@ -153,6 +156,96 @@ class CadastroActivity : AppCompatActivity() {
                 _ignore = true
                 binding.cadastroEditTextDataNasc.setText(sb.toString())
                 binding.cadastroEditTextDataNasc.setSelection(sb.length)
+
+            }
+        })
+    }
+
+    private fun setupCPFInput(textfield: EditText) {
+        textfield.addTextChangedListener(object : TextWatcher {
+
+            var sb : StringBuilder = StringBuilder("")
+
+            var _ignore = false
+
+            override fun afterTextChanged(s: Editable?) {}
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+
+                if(_ignore){
+                    _ignore = false
+                    return
+                }
+
+                sb.clear()
+                sb.append(if(s!!.length > 14){ s.subSequence(0,14) }else{ s })
+
+                if(sb.lastIndex == 3){
+                    if(sb[3] != '.'){
+                        sb.insert(3,".")
+                    }
+                } else if(sb.lastIndex == 7){
+                    if(sb[7] != '.'){
+                        sb.insert(7,".")
+                    }
+                } else if(sb.lastIndex == 11){
+                    if(sb[11] != '-'){
+                        sb.insert(11,"-")
+                    }
+                }
+
+                _ignore = true
+                binding.cadastroEditTextCPF.setText(sb.toString())
+                binding.cadastroEditTextCPF.setSelection(sb.length)
+
+            }
+        })
+    }
+
+    private fun setupPhoneNumberInput(textfield: EditText) {
+        textfield.addTextChangedListener(object : TextWatcher {
+
+            var sb : StringBuilder = StringBuilder("")
+
+            var _ignore = false
+
+            override fun afterTextChanged(s: Editable?) {}
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+
+                if(_ignore){
+                    _ignore = false
+                    return
+                }
+
+                sb.clear()
+                sb.append(if(s!!.length > 15){ s.subSequence(0,15) }else{ s })
+
+                if(sb.lastIndex == 0){
+                    if(sb[0] != '('){
+                        sb.insert(0,"(")
+                    }
+                } else if(sb.lastIndex == 5){
+                    if(sb[5] != ')'){
+                        sb.insert(3,")")
+                    }
+                } else if(sb.lastIndex == 3){
+                    if(sb[3] != ' '){
+                        sb.insert(3," ")
+                    }
+                } else if(sb.lastIndex == 10){
+                    if(sb[10] != '-'){
+                        sb.insert(10,"-")
+                    }
+                }
+
+                _ignore = true
+                binding.cadastroEditTextCelular.setText(sb.toString())
+                binding.cadastroEditTextCelular.setSelection(sb.length)
 
             }
         })
