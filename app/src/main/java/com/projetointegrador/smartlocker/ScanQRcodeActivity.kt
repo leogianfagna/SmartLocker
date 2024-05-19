@@ -68,7 +68,8 @@ class ScanQRcodeActivity : AppCompatActivity() {
                 }
 
         }else {
-             Toast.makeText(this, "QRCode Invalido", Toast.LENGTH_LONG)
+             // TODO: Implementar mensagem fixa para conseguir ler melhor com botão de confirmação. Além disso, implementar mensagem do que fazer nesse caso (não leu o QRCODE, e ai?)
+             Toast.makeText(this, "QRCode inválido.", Toast.LENGTH_LONG)
                  .show()
 
          }
