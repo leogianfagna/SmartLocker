@@ -61,7 +61,8 @@ class ScanQRcodeActivity : AppCompatActivity() {
                             Toast.LENGTH_LONG
                         ).show()
                     }else{
-                        Toast.makeText(this, "Local invalido, confirme a unidade de locação com o cliente", Toast.LENGTH_LONG)
+                        // TODO: Implementar mensagem fixa com botão de confirmação. Toast e Snackbar serão difíceis de ler.
+                        Toast.makeText(this, "Local inválido, confirme a unidade de locação com o cliente.", Toast.LENGTH_LONG)
                             .show()
                     }
                 }
