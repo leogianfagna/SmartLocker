@@ -41,7 +41,7 @@ class CamPreviewActivity(): AppCompatActivity() {
     // Selecionar qual câmera iremos trabalhar
     private lateinit var cameraSelector: CameraSelector
 
-    //Salvar image
+    // Imagem capturada, já nasce como nula
     private var imageCapture: ImageCapture? = null
 
     private lateinit var imgCaptureExecuter: ExecutorService
