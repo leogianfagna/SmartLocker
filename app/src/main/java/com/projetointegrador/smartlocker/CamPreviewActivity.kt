@@ -38,7 +38,7 @@ class CamPreviewActivity(): AppCompatActivity() {
     // Controla as instâncias PROVIDER, não deixa abrir mais de uma tela de permissão
     private lateinit var cameraProviderFuture: ListenableFuture<ProcessCameraProvider>
 
-    //Imagem capturada
+    // Selecionar qual câmera iremos trabalhar
     private lateinit var cameraSelector: CameraSelector
 
     //Salvar image
