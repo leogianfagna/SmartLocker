@@ -35,7 +35,7 @@ class CamPreviewActivity(): AppCompatActivity() {
 
     private lateinit var file: File
 
-    //Controlar estado do driver da camera
+    // Controla as instâncias PROVIDER, não deixa abrir mais de uma tela de permissão
     private lateinit var cameraProviderFuture: ListenableFuture<ProcessCameraProvider>
 
     //Imagem capturada
