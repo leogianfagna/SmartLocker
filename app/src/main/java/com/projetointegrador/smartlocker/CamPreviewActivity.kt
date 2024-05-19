@@ -44,6 +44,7 @@ class CamPreviewActivity(): AppCompatActivity() {
     // Imagem capturada, já nasce como nula
     private var imageCapture: ImageCapture? = null
 
+// Objeto do android que cria uma thread para gravar a imagem (não podemos usar a mesma thread pois se não pararia o preview)
     private lateinit var imgCaptureExecuter: ExecutorService
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
