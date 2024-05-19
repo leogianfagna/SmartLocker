@@ -51,7 +51,7 @@
             android:id="@+id/btnLogar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Logar"
+            android:text="Entrar"
             android:layout_marginTop="15dp"
             style="@style/btnPrimary" />
 
@@ -76,7 +76,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Esqueci minha senha"
+                android:text="Esqueceu sua senha?"
                 android:textAlignment="center"
                 style="@style/btnHyperLink" />
 
