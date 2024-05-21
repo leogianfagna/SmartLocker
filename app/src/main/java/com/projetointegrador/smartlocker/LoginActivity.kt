@@ -119,9 +119,11 @@ class LoginActivity : AppCompatActivity() {
 
     private fun iniciarMainActivity() {
         // Conferir se há pendência
-        val userId = FirebaseAuth.getInstance().currentUser!!.uid
+        //val userId = FirebaseAuth.getInstance().currentUser!!.uid
 
-        val docRef = db.collection("usuarios").document(userId)
+        //CORRIGIR PENDENCIA (LOCAL DE LOCAÇÃO PENDENTE FOI MUDADO NO FIREBASE)
+
+        /*val docRef = db.collection("usuarios").document(userId)
         docRef.get()
             .addOnSuccessListener { document ->
                 if (document != null && document.exists()) {
@@ -158,7 +160,7 @@ class LoginActivity : AppCompatActivity() {
                 startActivity(iniciarActivity)
                 finish()
                 Log.d(TAG, "Entrou no erro")
-            }
+            }*/
     }
 
     private fun isOnline(context: Context): Boolean {
