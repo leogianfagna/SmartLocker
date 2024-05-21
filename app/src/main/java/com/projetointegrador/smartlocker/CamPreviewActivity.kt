@@ -95,7 +95,7 @@ class CamPreviewActivity(): AppCompatActivity() {
                 imgCaptureExecuter,
                 object : ImageCapture.OnImageSavedCallback{
                     override fun onImageSaved(outputFileResults: ImageCapture.OutputFileResults) {
-                        //COLOCAR CODIGO PARA MUDAR DE ACTIVITY
+                        //TODO: Adicionar mudança de activity (qual?)
                         Log.i("Camera", "Imagem ${file.toURI()} salva.")
 
                     }
