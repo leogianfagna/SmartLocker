@@ -7,4 +7,81 @@
     android:layout_height="match_parent"
     tools:context=".ConfirmarDuplaActivity">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/main_black"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/btn_Voltar"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:background="@drawable/left_arrow"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppinsbold"
+            android:textSize="17dp"
+            android:textColor="@color/white"
+            android:textAlignment="center"
+            android:text="FOTOS DOS LOCATÁRIOS"/>
+    </androidx.appcompat.widget.Toolbar>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/appCompatTextView3"
+        android:layout_width="288dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppinsbold"
+        android:layout_marginTop="64dp"
+        android:textSize="25dp"
+        android:lineHeight="26dp"
+        android:text="Confirme os locatários"
+        android:textAllCaps="true"
+        android:textColor="@color/main_black"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        app:layout_constraintStart_toStartOf="@+id/appCompatTextView5"
+        app:layout_constraintTop_toBottomOf="@+id/appCompatTextView5"
+        app:layout_constraintEnd_toEndOf="@+id/appCompatTextView5">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnPermissao"
+            android:layout_width="132dp"
+            android:layout_height="51dp"
+            android:text="Sim"
+            android:layout_marginEnd="8dp"
+            style="@style/btnPrimary" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnNegar"
+            android:layout_width="132dp"
+            android:layout_height="51dp"
+            android:text="Não"
+            style="@style/btnSecundary" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/appCompatTextView5"
+        style="@style/subTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:text="A pessoa com a pulseira está\nem uma das fotos?"
+        app:layout_constraintStart_toStartOf="@+id/appCompatTextView3"
+        app:layout_constraintTop_toBottomOf="@+id/appCompatTextView3"
+        app:layout_constraintEnd_toEndOf="@+id/appCompatTextView3"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

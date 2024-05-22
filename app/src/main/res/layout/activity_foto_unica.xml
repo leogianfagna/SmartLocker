@@ -7,6 +7,30 @@
     android:layout_height="match_parent"
     tools:context=".FotoUnicaActivity">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/main_black"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/btn_Voltar"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:background="@drawable/left_arrow"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppinsbold"
+            android:textSize="17dp"
+            android:textColor="@color/white"
+            android:textAlignment="center"
+            android:text="FOTO DO CLIENTE"/>
+    </androidx.appcompat.widget.Toolbar>
+
 <androidx.appcompat.widget.AppCompatTextView
     android:id="@+id/appCompatTextView3"
     android:layout_width="288dp"
@@ -21,7 +45,7 @@
     android:textAlignment="center"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent" />
+    app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
 <androidx.appcompat.widget.AppCompatTextView
     android:id="@+id/appCompatTextView5"
@@ -32,24 +56,34 @@
     android:text="Certifique-se de captar por inteiro o\nrosto do cliente"
     app:layout_constraintStart_toStartOf="@+id/appCompatTextView3"
     app:layout_constraintTop_toBottomOf="@+id/appCompatTextView3"
-    />
-
-
+    app:layout_constraintEnd_toEndOf="@+id/appCompatTextView3"/>
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnCardConfirm"
-        style="@style/btnPrimary"
-        android:layout_width="335dp"
+        android:id="@+id/btnContinue"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/contorno_btnprincipal"
-        android:fontFamily="@font/robotobold"
         android:text="Continuar"
-        android:textColor="@color/white"
-        android:textSize="17dp"
-        tools:layout_editor_absoluteX="37dp"
-        tools:layout_editor_absoluteY="487dp" />
+        android:layout_marginTop="15dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
+        style="@style/btnPrimary"
+        app:layout_constraintStart_toStartOf="@+id/appCompatTextView5"
+        app:layout_constraintTop_toBottomOf="@+id/appCompatTextView5"
+        app:layout_constraintEnd_toEndOf="@+id/appCompatTextView5"/>
 
-</androidx.appcompat.widget.LinearLayoutCompat>
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnOutraFoto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Tirar outra foto"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
+        style="@style/btnSecundary"
+        app:layout_constraintStart_toStartOf="@+id/btnContinue"
+        app:layout_constraintTop_toBottomOf="@+id/btnContinue"
+        app:layout_constraintEnd_toEndOf="@+id/btnContinue"/>
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
