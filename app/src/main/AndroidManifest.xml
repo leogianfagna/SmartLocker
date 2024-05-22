@@ -31,6 +31,21 @@
         android:theme="@style/Theme.smartlocker"
         tools:targetApi="33">
         <activity
+            android:name=".ConfirmarDuplaActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ConfirmarUmClienteActivity"
+            android:exported="false" />
+        <activity
+            android:name=".FotoDuplaDoisActivity"
+            android:exported="false" />
+        <activity
+            android:name=".FotoDuplaUmActivity"
+            android:exported="false" />
+        <activity
+            android:name=".FotoUnicaActivity"
+            android:exported="false" />
+        <activity
             android:name=".ReleaseLockerActivity"
             android:exported="false" />
         <activity
@@ -63,13 +78,11 @@
         <activity
             android:name=".InicioActivity"
             android:exported="true">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
 
         <meta-data
