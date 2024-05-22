@@ -87,7 +87,7 @@ class UnidadeInfoFragment : Fragment() {
                     }
                 }
             }.addOnFailureListener {
-                Log.d(TAG, "erro ao pegar os dados", it)
+                Log.d(TAG, "Erro ao coletar dados.", it)
             }
 
 
