@@ -149,8 +149,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                                                 .commit()
                                         }
                                     }else{
-                                        subtitle.text = "Sem armarios disponiveis"
-                                        button.text = "Lotato"
+                                        subtitle.text = "Sem armários disponíveis"
+                                        button.text = "Lotado"
                                     }
 
 

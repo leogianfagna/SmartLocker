@@ -43,31 +43,33 @@ class ScanQRcodeActivity : AppCompatActivity() {
         ScanContract()
     ) { result: ScanIntentResult ->
         val userId = FirebaseAuth.getInstance().currentUser!!.uid
-         if (userId!=result.contents && result.contents.length == 28){
-            Toast.makeText(this, "Usuário Invalido", Toast.LENGTH_LONG)
-                .show()
-        } else if (userId==result.contents){
 
+        // Usuário da leitura não condiz com o userId
+        if (userId != result.contents && result.contents.length == 28) {
+            Toast.makeText(this, "Usuário Inválido", Toast.LENGTH_LONG).show()
+        } else if (userId == result.contents) {
+
+            // Usuário válido, processar condições
             db.collection("locação")
                 .document(userId).get()
-                .addOnSuccessListener {document ->
+                .addOnSuccessListener { document ->
                     val unidade = document.getString("unidade")!!
-                    if (unidade=="UNICAMP"){
-                        /*val i = Intent(this, InicioActivity::class.java)
-                        startActivity(i)*/
-                        Toast.makeText(
-                            this,
-                            "Usuário confirmado",
-                            Toast.LENGTH_LONG
-                        ).show()
-                    }else{
+
+                    // Unidade confirmada, todos os processos de verificações foram atingidos
+                    // TODO: Lógica para validar o QRCode com a localização
+                    if (unidade == "UNICAMP") {
+                        Toast.makeText(this, "Usuário confirmado", Toast.LENGTH_LONG).show()
+                        val i = Intent(this, ReleaseLockerActivity::class.java)
+
+                        startActivity(i)
+                    } else {
                         // TODO: Implementar mensagem fixa com botão de confirmação. Toast e Snackbar serão difíceis de ler.
                         Toast.makeText(this, "Local inválido, confirme a unidade de locação com o cliente.", Toast.LENGTH_LONG)
                             .show()
                     }
                 }
 
-        }else {
+        } else {
              // TODO: Implementar mensagem fixa para conseguir ler melhor com botão de confirmação. Além disso, implementar mensagem do que fazer nesse caso (não leu o QRCODE, e ai?)
              Toast.makeText(this, "QRCode inválido.", Toast.LENGTH_LONG)
                  .show()

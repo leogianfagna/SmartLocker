@@ -1,5 +1,6 @@
 package com.projetointegrador.smartlocker
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
@@ -58,9 +59,8 @@ class CamPreviewActivity(): AppCompatActivity() {
 
         startCAM()
 
-        val int = intent
-
-        val numCliente = int.extras?.getInt("numeroCliente")!!
+        // @léo
+        val numCliente = intent.getStringExtra("clientes")!!.toInt()
 
         binding.butao.setOnClickListener {
             tirarFoto(numCliente)
@@ -68,8 +68,6 @@ class CamPreviewActivity(): AppCompatActivity() {
     }
 
     private fun tirarFoto(numCliente: Int){
-
-
 
         imageCapture?.let {
 
