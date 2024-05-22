@@ -60,31 +60,49 @@ class CamPreviewActivity(): AppCompatActivity() {
         startCAM()
 
         // @léo
-        val numCliente = intent.getStringExtra("clientes")!!.toInt()
 
         binding.butao.setOnClickListener {
-            tirarFoto(numCliente)
+            tirarFoto()
         }
     }
 
-    private fun tirarFoto(numCliente: Int){
+    private fun mudarActivityUmCliente(){
+        //Colocar activity de um cliente
+
+        finish()
+
+
+    }
+    private fun mudarActivityPrimeiroCliente(){
+        //Colocar activity do primeiro cliente
+        finish()
+    }
+
+    private fun mudarActivitySegundoCliente(){
+        //Colocar activity do segundo cliente
+        finish()
+    }
+
+    private fun tirarFoto(){
+
+        val i = intent
+
+        val userId = FirebaseAuth.getInstance().currentUser!!.uid
+
+        var ordem = i.extras?.getString("ordem")
+        var numClientes = i.extras?.getString("numClientes")
+
+        var fileName = ""
+
+        if(ordem=="primeiro"){
+            fileName = "$userId"
+        }else{
+            fileName = "$userId-2"
+        }
 
         imageCapture?.let {
 
-            val userId = FirebaseAuth.getInstance().currentUser!!.uid
-
-            //nome do arquivo para gravar arquivo
-
-            if (numCliente==1){
-                val fileName = "$userId"
-                file = File(externalMediaDirs[0], fileName)
-            }else if (numCliente==2){
-                val fileName = "${userId}-2"
-                file = File(externalMediaDirs[0], fileName)
-            }
-
-
-
+            val file = File(externalMediaDirs[0], fileName)
 
             val outputFileOptions =  ImageCapture.OutputFileOptions.Builder(file).build()
 
@@ -93,8 +111,16 @@ class CamPreviewActivity(): AppCompatActivity() {
                 imgCaptureExecuter,
                 object : ImageCapture.OnImageSavedCallback{
                     override fun onImageSaved(outputFileResults: ImageCapture.OutputFileResults) {
-                        //TODO: Adicionar mudança de activity (qual?)
-                        Log.i("Camera", "Imagem ${file.toURI()} salva.")
+                        Log.i("Camera", "Image Salva ${file.toURI()}")
+
+                        if(ordem=="primeiro"&&numClientes=="um"){
+                            mudarActivityUmCliente()
+                        }else if(ordem=="primeiro"&&numClientes=="dois"){
+                            mudarActivityPrimeiroCliente()
+                        }else if(ordem=="segundo"&&numClientes=="dois"){
+                            mudarActivitySegundoCliente()
+                        }
+
 
                     }
 
