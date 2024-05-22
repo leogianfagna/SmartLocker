@@ -31,6 +31,17 @@
         android:theme="@style/Theme.smartlocker"
         tools:targetApi="33">
         <activity
+            android:name=".ConfirmRentActivity"
+            android:exported="true">
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+        </activity>
+        <activity
             android:name=".ReleaseLockerActivity"
             android:exported="false" />
         <activity
@@ -63,13 +74,13 @@
         <activity
             android:name=".InicioActivity"
             android:exported="true">
-
+            <!--
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
+            -->
         </activity>
 
         <meta-data
