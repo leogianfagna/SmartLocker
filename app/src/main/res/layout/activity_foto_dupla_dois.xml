@@ -68,9 +68,9 @@
         android:layout_marginStart="40dp"
         android:layout_marginEnd="40dp"
         style="@style/btnPrimary"
-        app:layout_constraintStart_toStartOf="@+id/appCompatTextView5"
-        app:layout_constraintTop_toBottomOf="@+id/appCompatTextView5"
-        app:layout_constraintEnd_toEndOf="@+id/appCompatTextView5"/>
+        app:layout_constraintStart_toStartOf="@+id/imageViewLocatario"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewLocatario"
+        app:layout_constraintEnd_toEndOf="@+id/imageViewLocatario"/>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnOutraFoto"
@@ -84,5 +84,15 @@
         app:layout_constraintStart_toStartOf="@+id/btnContinue"
         app:layout_constraintTop_toBottomOf="@+id/btnContinue"
         app:layout_constraintEnd_toEndOf="@+id/btnContinue"/>
+
+    <ImageView
+        android:id="@+id/imageViewLocatario"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintTop_toBottomOf="@id/appCompatTextView5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:src="@drawable/ic_launcher_background"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

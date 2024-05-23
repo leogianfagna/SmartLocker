@@ -23,7 +23,7 @@ class FotoDuplaDoisActivity : AppCompatActivity() {
         }
 
         binding.btnContinue.setOnClickListener {
-            val activity = Intent(this, /*LINKAR OUTRA ACTIVITY AQUI*/ ::class.java)
+            val activity = Intent(this, CamPreviewActivity::class.java)
             startActivity(activity)
             finish()
         }
@@ -39,7 +39,7 @@ class FotoDuplaDoisActivity : AppCompatActivity() {
         //BOTAO ABAIXO VOLTA
 
         binding.btnVoltar.setOnClickListener {
-            val activity = Intent(this, /*LINKAR OUTRA ACTIVITY AQUI*/::class.java)
+            val activity = Intent(this, CamPreviewActivity::class.java)
             startActivity(activity)
             finish()
         }
