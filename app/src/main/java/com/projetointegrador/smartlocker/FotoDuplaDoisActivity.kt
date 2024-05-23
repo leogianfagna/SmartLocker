@@ -35,5 +35,13 @@ class FotoDuplaDoisActivity : AppCompatActivity() {
             startActivity(activity)
             finish()
         }
+
+        //BOTAO ABAIXO VOLTA
+
+        binding.btnVoltar.setOnClickListener {
+            val activity = Intent(this, /*LINKAR OUTRA ACTIVITY AQUI*/::class.java)
+            startActivity(activity)
+            finish()
+        }
     }
 }
