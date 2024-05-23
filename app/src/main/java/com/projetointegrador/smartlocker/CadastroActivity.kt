@@ -10,6 +10,7 @@ import android.text.TextWatcher
 import android.util.Log
 import android.view.View
 import android.widget.EditText
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -93,8 +94,14 @@ class CadastroActivity : AppCompatActivity() {
         lateinit var snackbar: Snackbar
         auth.createUserWithEmailAndPassword(email, senha)
             .addOnCompleteListener{ cadastro ->
-                snackbar = Snackbar.make(it, "Conta criada", Snackbar.LENGTH_SHORT)
-                snackbar.show()
+                auth.currentUser?.sendEmailVerification()
+                    ?.addOnSuccessListener {
+                        Toast.makeText(this, "Verifique seu email para validar conta", Toast.LENGTH_LONG).show()
+
+                    }
+                    ?.addOnFailureListener {
+                        Toast.makeText(this, it.toString(), Toast.LENGTH_LONG).show()
+                    }
 
                 val usuariosMap = hashMapOf(
                     "nome" to nome,
@@ -111,10 +118,10 @@ class CadastroActivity : AppCompatActivity() {
                 db.collection("usuarios").document(userId)
                     .set(usuariosMap).addOnSuccessListener {
                         Log.d("db", "sucesso ao salvar os dados")
-                        print("mensagem sucesso")
                     }.addOnFailureListener{e ->
                         Log.w("db", "deu erro ao salvar os dados", e)
                     }
+                finish()
             }.addOnFailureListener { excessao ->
                 snackbar = Snackbar.make(it, "Um erro incomum ocorreu!", Snackbar.LENGTH_SHORT)
                 snackbar.show()
