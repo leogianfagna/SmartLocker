@@ -21,6 +21,9 @@ class FotoDuplaUmActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+//TODO A FOTO DEVE SER PUXADA LOCALMENTE
+        val imageResource = File(ExternalMediaDirs[0],"${userID}")
+        binding.imageViewLocatario.setImageResource(imageResource)
 
         //BOTAO ABAIXO ABRE A CAMERA NOVAMENTE E TIRA A FOTO DE OUTRO CLIENTE
 
