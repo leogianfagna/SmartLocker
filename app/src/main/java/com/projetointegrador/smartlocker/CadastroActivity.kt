@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
+import android.widget.Toast
 import android.view.View
 import android.widget.EditText
 import androidx.activity.enableEdgeToEdge
@@ -20,12 +21,21 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 
 class CadastroActivity : AppCompatActivity() {
     private lateinit var binding: ActivityCadastroBinding
     private val auth = FirebaseAuth.getInstance()
     private val db = Firebase.firestore
+    private fun validateInputLength(cpf: String, celular: String, dataNasc: String): Boolean {
+        val cpfLength = 14
+        val phoneNumberLength = 15
+        val birthDateLength = 10
+
+        return cpf.length == cpfLength && celular.length == phoneNumberLength && dataNasc.length == birthDateLength
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -65,6 +75,19 @@ class CadastroActivity : AppCompatActivity() {
                 val dataNasc:String = binding.cadastroEditTextDataNasc.text.toString()
                 val senha:String = binding.cadastroEditTextCriarSenha.text.toString()
                 val confSenha:String = binding.cadastroEditTextConfirmeSenha.text.toString()
+                if (!isValidBirthDate(dataNasc)) {
+                    Toast.makeText(this, "Data de nascimento inválida", Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
+                }
+
+                if (!isValidBirthDate(dataNasc)) {
+                    Toast.makeText(this, "Data de nascimento inválida", Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
+                }
+                if (!validateInputLength(cpf, celular, dataNasc)) {
+                    Toast.makeText(this, "Por favor, preencha todos os campos corretamente", Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
+                }
 
                 if (nome.isNotEmpty() && cpf.isNotEmpty() && email.isNotEmpty()
                     && email.isNotEmpty() && celular.isNotEmpty() && dataNasc.isNotEmpty()
@@ -89,6 +112,17 @@ class CadastroActivity : AppCompatActivity() {
         }
     }
 
+    private fun isValidBirthDate(date: String): Boolean {
+        val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale("pt", "BR"))
+        dateFormat.isLenient = false
+        return try {
+            dateFormat.parse(date)
+            true
+        } catch (e: Exception) {
+            false
+        }
+    }
+
     private fun criarConta(nome: String, cpf:String, email: String, celular: String, dataNasc:String, senha:String, confSenha:String, it: View) {
         lateinit var snackbar: Snackbar
         auth.createUserWithEmailAndPassword(email, senha)
@@ -110,10 +144,10 @@ class CadastroActivity : AppCompatActivity() {
 
                 db.collection("usuarios").document(userId)
                     .set(usuariosMap).addOnSuccessListener {
-                        Log.d("db", "sucesso ao salvar os dados")
+                        Log.d("db", "Dados salvos com sucesso!")
                         print("mensagem sucesso")
                     }.addOnFailureListener{e ->
-                        Log.w("db", "deu erro ao salvar os dados", e)
+                        Log.w("db", "Erro ao salvar os dados", e)
                     }
             }.addOnFailureListener { excessao ->
                 snackbar = Snackbar.make(it, "Um erro incomum ocorreu!", Snackbar.LENGTH_SHORT)

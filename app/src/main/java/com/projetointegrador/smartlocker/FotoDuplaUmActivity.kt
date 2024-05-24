@@ -7,10 +7,17 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.projetointegrador.smartlocker.databinding.ActivityFotoDuplaUmBinding
+import java.io.File
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
+import android.graphics.BitmapFactory
 
 class FotoDuplaUmActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityFotoDuplaUmBinding
+    private lateinit var userID: String
+    private val db = Firebase.firestore
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -21,11 +28,14 @@ class FotoDuplaUmActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-//TODO A FOTO DEVE SER PUXADA LOCALMENTE
-        val imageResource = File(ExternalMediaDirs[0],"${userID}")
-        binding.imageViewLocatario.setImageResource(imageResource)
 
-        //BOTAO ABAIXO ABRE A CAMERA NOVAMENTE E TIRA A FOTO DE OUTRO CLIENTE
+        userID = FirebaseAuth.getInstance().currentUser?.uid ?: ""
+        val imageFile = File(getExternalMediaDirs()[0], userID)
+
+        if(imageFile.exists()){
+            val myBitmap = BitmapFactory.decodeFile(imageFile.absolutePath)
+            binding.imageViewLocatario.setImageBitmap(myBitmap)
+        }
 
         binding.btnContinue.setOnClickListener {
             val activity = Intent(this, CamPreviewActivity::class.java)
@@ -33,7 +43,6 @@ class FotoDuplaUmActivity : AppCompatActivity() {
             finish()
         }
 
-        //BOTAO ABAIXO DESCARTA A FOTO TIRADA E ABRE A CAMERA NOVAMENTE
 
         binding.btnOutraFoto.setOnClickListener {
             val activity = Intent(this, CamPreviewActivity::class.java)
@@ -41,7 +50,6 @@ class FotoDuplaUmActivity : AppCompatActivity() {
             finish()
         }
 
-        //BOTAO ABAIXO VOLTA
 
         binding.btnVoltar.setOnClickListener {
             val activity = Intent(this, CamPreviewActivity::class.java)
