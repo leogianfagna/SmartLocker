@@ -101,7 +101,8 @@ class CadastroActivity : AppCompatActivity() {
                         "email" to email,
                         "cel" to celular,
                         "dataNasc" to dataNasc,
-                        "cartao" to false
+                        "cartao" to false,
+                        "gerente" to false
                     )
 
                     val user = FirebaseAuth.getInstance().currentUser
