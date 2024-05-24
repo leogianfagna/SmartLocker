@@ -1,7 +1,9 @@
 package com.projetointegrador.smartlocker
 
 import android.content.ContentValues.TAG
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -44,6 +46,7 @@ class ScanQRcodeActivity : AppCompatActivity() {
     ) { result: ScanIntentResult ->
         val userId = FirebaseAuth.getInstance().currentUser!!.uid
 
+
         // Usuário da leitura não condiz com o userId
         if (userId != result.contents && result.contents.length == 28) {
             Toast.makeText(this, "Usuário Inválido", Toast.LENGTH_LONG).show()
@@ -54,6 +57,8 @@ class ScanQRcodeActivity : AppCompatActivity() {
                 .document(userId).get()
                 .addOnSuccessListener { document ->
                     val unidade = document.getString("unidade")!!
+                    val nomeCliente = document.getString("nomeCliente")!! // Todo: Checar, não seria "locacao"?
+                    salvarUserNoSharedPreferences(this, nomeCliente)
 
                     // Unidade confirmada, todos os processos de verificações foram atingidos
                     // TODO: Lógica para validar o QRCode com a localização
@@ -80,5 +85,15 @@ class ScanQRcodeActivity : AppCompatActivity() {
     // Launch
     fun onButtonClick(view: View?) {
         barcodeLauncher.launch(ScanOptions())
+    }
+
+    // Função que vai salvar o nome do cliente no SharedPreferences, para conseguir pegar as demais
+    // informações desse cliente de forma mais fácil em outras activities
+    private fun salvarUserNoSharedPreferences(context: Context, userEscaneado: String) {
+        val sharedPref: SharedPreferences = context.getSharedPreferences("ControleGerente", Context.MODE_PRIVATE)
+        val editor: SharedPreferences.Editor = sharedPref.edit()
+
+        editor.putString("nomeClienteShared", userEscaneado)
+        editor.apply()
     }
 }

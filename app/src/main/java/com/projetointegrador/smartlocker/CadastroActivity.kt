@@ -10,6 +10,7 @@ import android.text.TextWatcher
 import android.util.Log
 import android.view.View
 import android.widget.EditText
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -89,44 +90,43 @@ class CadastroActivity : AppCompatActivity() {
         }
     }
 
-    private fun criarConta(nome: String, cpf: String, email: String, celular: String, dataNasc: String, senha: String, confSenha: String, it: View) {
+    private fun criarConta(nome: String, cpf:String, email: String, celular: String, dataNasc:String, senha:String, confSenha:String, it: View) {
+        lateinit var snackbar: Snackbar
         auth.createUserWithEmailAndPassword(email, senha)
-            .addOnCompleteListener { cadastro ->
-                if (cadastro.isSuccessful) {
-                    Snackbar.make(it, "Conta criada", Snackbar.LENGTH_SHORT).show()
+            .addOnCompleteListener{ cadastro ->
+                auth.currentUser?.sendEmailVerification()
+                    ?.addOnSuccessListener {
+                        Toast.makeText(this, "Verifique seu email para validar conta", Toast.LENGTH_LONG).show()
 
-                    val usuariosMap = hashMapOf(
-                        "nome" to nome,
-                        "cpf" to cpf,
-                        "email" to email,
-                        "cel" to celular,
-                        "dataNasc" to dataNasc,
-                        "cartao" to false
-                    )
-
-                    val user = FirebaseAuth.getInstance().currentUser
-                    if (user != null) {
-                        val userId = user.uid
-                        db.collection("usuarios").document(userId)
-                            .set(usuariosMap)
-                            .addOnSuccessListener {
-                                Log.d("db", "sucesso ao salvar os dados")
-                                // Outras ações após o sucesso, se necessário
-                            }
-                            .addOnFailureListener { e ->
-                                Log.w("db", "deu erro ao salvar os dados", e)
-                            }
-                    } else {
-                        Snackbar.make(it, "Erro ao obter o usuário", Snackbar.LENGTH_SHORT).show()
                     }
-                } else {
-                    Snackbar.make(it, "Um erro incomum ocorreu! Tente novamente", Snackbar.LENGTH_SHORT).show()
-                }
+                    ?.addOnFailureListener {
+                        Toast.makeText(this, it.toString(), Toast.LENGTH_LONG).show()
+                    }
+
+                val usuariosMap = hashMapOf(
+                    "nome" to nome,
+                    "cpf" to cpf,
+                    "email" to email,
+                    "cel" to celular,
+                    "dataNasc" to dataNasc,
+                    "cartao" to false
+
+                )
+
+                val userId = FirebaseAuth.getInstance().currentUser!!.uid
+
+                db.collection("usuarios").document(userId)
+                    .set(usuariosMap).addOnSuccessListener {
+                        Log.d("db", "sucesso ao salvar os dados")
+                    }.addOnFailureListener{e ->
+                        Log.w("db", "deu erro ao salvar os dados", e)
+                    }
+                finish()
+            }.addOnFailureListener { excessao ->
+                snackbar = Snackbar.make(it, "Um erro incomum ocorreu!", Snackbar.LENGTH_SHORT)
+                snackbar.show()
             }
-            .addOnFailureListener { e ->
-                Snackbar.make(it, "Não foi possível criar sua conta! Tente novamente", Snackbar.LENGTH_SHORT).show()
-                Log.w("Criação de conta", "$e")
-            }
+
     }
 
     private fun setupDateInput(textfield: EditText) {
