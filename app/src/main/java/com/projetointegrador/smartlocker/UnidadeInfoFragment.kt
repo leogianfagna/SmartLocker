@@ -44,7 +44,6 @@ class UnidadeInfoFragment : Fragment() {
                 if (document != null) {
                     binding.tvNomeUnidade.text = "Unidade ${document.getString("nome")}"
                     binding.tvHorarioFuncionamento.text = document.getString("funcionamento")
-                    binding.tvStatus.text = if (document.getBoolean("isClosed") == true) "Fechado" else "Aberto"
                     binding.tvEndereco.text = document.getString("endereco")
                 }
             }
