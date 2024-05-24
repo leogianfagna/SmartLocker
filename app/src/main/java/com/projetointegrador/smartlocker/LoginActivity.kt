@@ -1,31 +1,20 @@
 package com.projetointegrador.smartlocker
 
-import android.app.Activity
-import android.content.ContentValues
-import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.Intent
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Bundle
 import android.util.Log
-import android.view.View
-import android.widget.TextView
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.projetointegrador.smartlocker.databinding.ActivityLoginBinding
 import android.widget.Toast
 import android.widget.Toast.LENGTH_SHORT
 import com.google.android.material.snackbar.Snackbar
-import com.google.firebase.firestore.SetOptions
 
 class LoginActivity : AppCompatActivity() {
 
@@ -65,10 +54,9 @@ class LoginActivity : AppCompatActivity() {
         // Acessar como visitante (modo anônimo no Auth)
         binding.btnVisitante.setOnClickListener {
 
-            if (!isOnline(this)){
-                var snackbar = Snackbar.make(it, "Conecte-se a internet", Snackbar.LENGTH_SHORT)
-                snackbar.show()
-            }else{
+            if (!isOnline(this)) {
+                Snackbar.make(it, "Conecte-se a internet.", Snackbar.LENGTH_SHORT).show()
+            } else {
                 // Logar no modo anônimo do Firebase Auth
                 auth.signInAnonymously()
                     .addOnCompleteListener { task ->
@@ -77,13 +65,7 @@ class LoginActivity : AppCompatActivity() {
                                 "cartao" to false
                             )
                             val userId = FirebaseAuth.getInstance().currentUser!!.uid
-                            db.collection("usuarios").document(userId)
-                                .set(usuariosMap).addOnSuccessListener {
-                                    Log.d("db", "sucesso ao salvar os dados")
-                                    print("mensagem sucesso")
-                                }.addOnFailureListener{e ->
-                                    Log.w("db", "deu erro ao salvar os dados", e)
-                                }
+                            db.collection("usuarios").document(userId).set(usuariosMap)
                             Toast.makeText(this,"Logado no modo anônimo com sucesso!", LENGTH_SHORT).show()
                             iniciarMainActivity()
                         } else {
@@ -91,7 +73,6 @@ class LoginActivity : AppCompatActivity() {
                         }
                     }
             }
-
         }
 
         // Botão de logar com email
@@ -116,8 +97,13 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-
     private fun iniciarMainActivity() {
+        // TODO: temporario
+        val i = Intent(this, ReleaseLockerActivity::class.java)
+        startActivity(i)
+        finish()
+
+
         // Conferir se há pendência
         //val userId = FirebaseAuth.getInstance().currentUser!!.uid
 
