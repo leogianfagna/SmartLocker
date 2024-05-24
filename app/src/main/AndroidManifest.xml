@@ -8,7 +8,8 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"
+        android:maxSdkVersion="32" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission
         android:name="android.permission.QUERY_ALL_PACKAGES"
@@ -31,6 +32,21 @@
         android:theme="@style/Theme.smartlocker"
         tools:targetApi="33">
         <activity
+            android:name=".ConfirmarDuplaActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ConfirmarUmClienteActivity"
+            android:exported="false" />
+        <activity
+            android:name=".FotoDuplaDoisActivity"
+            android:exported="false"/>
+        <activity
+            android:name=".FotoDuplaUmActivity"
+            android:exported="false" />
+        <activity
+            android:name=".FotoUnicaActivity"
+            android:exported="false"/>
+        <activity
             android:name=".OpenLockerActivity"
             android:exported="false" />
         <activity
@@ -44,10 +60,10 @@
             android:exported="false" />
         <activity
             android:name=".MapsActivity"
-            android:exported="false" />
+            android:exported="false"/>
         <activity
             android:name=".ChangeActivity"
-            android:exported="false" />
+            android:exported="false"/>
         <activity
             android:name=".ScanQRcodeActivity"
             android:exported="false" />

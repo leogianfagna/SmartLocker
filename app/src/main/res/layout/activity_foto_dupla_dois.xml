@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".FotoDuplaDoisActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/main_black"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/btnVoltar"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:background="@drawable/left_arrow"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppinsbold"
+            android:textSize="17dp"
+            android:textColor="@color/white"
+            android:textAlignment="center"
+            android:text="SEGUNDA FOTO"/>
+    </androidx.appcompat.widget.Toolbar>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/appCompatTextView3"
+        android:layout_width="288dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppinsbold"
+        android:layout_marginTop="64dp"
+        android:textSize="25dp"
+        android:lineHeight="26dp"
+        android:text="Foto da segunda pessoa"
+        android:textAllCaps="true"
+        android:textColor="@color/main_black"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/appCompatTextView5"
+        style="@style/subTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:text="Verifique se a foto consegue pegar o \nrosto completo do cliente"
+        app:layout_constraintStart_toStartOf="@+id/appCompatTextView3"
+        app:layout_constraintTop_toBottomOf="@+id/appCompatTextView3"
+        app:layout_constraintEnd_toEndOf="@+id/appCompatTextView3"/>
+
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnContinue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Continuar"
+        android:layout_marginTop="15dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
+        style="@style/btnPrimary"
+        app:layout_constraintStart_toStartOf="@+id/imageViewLocatario"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewLocatario"
+        app:layout_constraintEnd_toEndOf="@+id/imageViewLocatario"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnOutraFoto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Tirar outra foto"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
+        style="@style/btnSecundary"
+        app:layout_constraintStart_toStartOf="@+id/btnContinue"
+        app:layout_constraintTop_toBottomOf="@+id/btnContinue"
+        app:layout_constraintEnd_toEndOf="@+id/btnContinue"/>
+
+    <ImageView
+        android:id="@+id/imageViewLocatario"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintTop_toBottomOf="@id/appCompatTextView5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:src="@drawable/ic_launcher_background"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
