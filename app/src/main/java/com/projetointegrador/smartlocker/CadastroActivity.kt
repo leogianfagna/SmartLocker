@@ -337,6 +337,10 @@ class CadastroActivity : AppCompatActivity() {
         confSenha: String,
         it: View
     ) {
+        if (senha.length < 6) {
+            binding.cadastroEditTextCriarSenha.error = "A senha deve ter pelo menos 6 caracteres"
+            return
+        }
         auth.createUserWithEmailAndPassword(email, senha)
             .addOnCompleteListener { cadastro ->
                 if (cadastro.isSuccessful) {
