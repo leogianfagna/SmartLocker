@@ -51,7 +51,6 @@ class UnidadeInfoFragment : Fragment() {
 
         binding.btnBeginRent.setOnClickListener {
             // Todo: COLOCAR ALGUM CHECK PRA VER SE O USUÁRIO JA TEM UM ALUGUEL
-
             possuiCartaoCadastrado(nomeUnidade)
 
 
