@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingHorizontal="16dp"
+    tools:context=".ArmarioRentedActivity">
+
+        <TextView
+            android:id="@+id/tvTitulo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="LOCAÇÃO EFETIVADA"
+            android:gravity="center"
+            style="@style/mainTitle"
+            />
+
+        <TextView
+            android:id="@+id/tvArmarioRented"
+            android:layout_marginTop="180dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="LOCAÇÃO CONCLUÍDA"
+            android:layout_gravity="center"
+            android:paddingBottom="24dp"
+            style="@style/mainTitle"
+            />
+
+        <TextView
+            android:id="@+id/tvNumeroArmario"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Número do armário: "
+            android:textSize="16sp"
+            android:layout_gravity="start"
+            android:paddingBottom="8dp"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:id="@+id/tvCliente"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cliente: "
+            android:textSize="16sp"
+            android:layout_gravity="start"
+            android:paddingBottom="8dp"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:id="@+id/tvInicio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Início: "
+            android:textSize="16sp"
+            android:layout_gravity="start"
+            android:paddingBottom="8dp"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:id="@+id/tvTermino"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Término: "
+            android:textSize="16sp"
+            android:layout_gravity="start"
+            android:paddingBottom="8dp"
+            android:textColor="@color/black" />
+
+        <Button
+            android:id="@+id/btnVoltar"
+            android:layout_width="wrap_content"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Voltar para tela principal"
+            style="@style/btnPrimary" />
+
+</androidx.appcompat.widget.LinearLayoutCompat>

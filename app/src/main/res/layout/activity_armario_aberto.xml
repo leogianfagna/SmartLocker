@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/main"
+    android:orientation="vertical"
+    android:paddingHorizontal="16dp"
+    tools:context=".ArmarioAbertoActivity">
+
+    <TextView
+        android:id="@+id/tvTitulo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="ABRIR ARMÁRIO"
+        android:gravity="center"
+        style="@style/mainTitle"
+         />
+
+    <TextView
+        android:id="@+id/tvArmarioAberto"
+        android:layout_marginTop="180dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ARMÁRIO ABERTO"
+        android:layout_gravity="center"
+        android:paddingBottom="24dp"
+        style="@style/mainTitle"
+         />
+
+    <TextView
+        android:id="@+id/tvNumeroLocacao"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Número da locação: "
+        android:textSize="16sp"
+        android:layout_gravity="start"
+        android:paddingBottom="8dp"
+        android:textColor="@color/black" />
+
+    <TextView
+        android:id="@+id/tvCliente"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cliente: "
+        android:textSize="16sp"
+        android:layout_gravity="start"
+        android:paddingBottom="8dp"
+        android:textColor="@color/black" />
+
+    <TextView
+        android:id="@+id/tvInicio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Início: "
+        android:textSize="16sp"
+        android:layout_gravity="start"
+        android:paddingBottom="8dp"
+        android:textColor="@color/black" />
+
+    <TextView
+        android:id="@+id/tvTermino"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Término: "
+        android:textSize="16sp"
+        android:layout_gravity="start"
+        android:paddingBottom="8dp"
+        android:textColor="@color/black" />
+
+    <Button
+        android:id="@+id/btnVoltar"
+        android:layout_width="wrap_content"
+        android:layout_gravity="center"
+        android:layout_height="wrap_content"
+        android:text="Voltar para tela principal"
+        android:layout_marginTop="16dp"
+        style="@style/btnPrimary" />
+
+</androidx.appcompat.widget.LinearLayoutCompat>
