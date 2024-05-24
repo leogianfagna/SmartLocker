@@ -47,6 +47,12 @@
             android:name=".FotoUnicaActivity"
             android:exported="false"/>
         <activity
+            android:name=".OpenLockerActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ConfirmRentActivity"
+            android:exported="false" />
+        <activity
             android:name=".ReleaseLockerActivity"
             android:exported="false" />
         <activity

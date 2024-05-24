@@ -1,8 +1,5 @@
 package com.projetointegrador.smartlocker
 
-import android.app.Activity
-import android.content.ContentValues
-import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.Intent
 import android.net.ConnectivityManager
@@ -10,15 +7,9 @@ import android.net.NetworkCapabilities
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.TextView
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.projetointegrador.smartlocker.databinding.ActivityLoginBinding
@@ -30,7 +21,6 @@ import com.google.firebase.firestore.SetOptions
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginBinding
-
     private val auth = FirebaseAuth.getInstance()
     private val db = Firebase.firestore
 
@@ -46,7 +36,7 @@ class LoginActivity : AppCompatActivity() {
         instanciarBotoes()
     }
 
-    fun instanciarBotoes() {
+    private fun instanciarBotoes() {
 
         // Página de cadastro (Não tenho uma conta)
         binding.btnCreateAccount.setOnClickListener {
@@ -65,25 +55,19 @@ class LoginActivity : AppCompatActivity() {
         // Acessar como visitante (modo anônimo no Auth)
         binding.btnVisitante.setOnClickListener {
 
-            if (!isOnline(this)){
-                var snackbar = Snackbar.make(it, "Conecte-se a internet", Snackbar.LENGTH_SHORT)
-                snackbar.show()
-            }else{
+            if (!isOnline(this)) {
+                Snackbar.make(it, "Conecte-se a internet.", Snackbar.LENGTH_SHORT).show()
+            } else {
                 // Logar no modo anônimo do Firebase Auth
                 auth.signInAnonymously()
                     .addOnCompleteListener { task ->
                         if (task.isSuccessful) {
                             val usuariosMap = hashMapOf(
-                                "cartao" to false
+                                "cartao" to false,
+                                "gerente" to false
                             )
                             val userId = FirebaseAuth.getInstance().currentUser!!.uid
-                            db.collection("usuarios").document(userId)
-                                .set(usuariosMap).addOnSuccessListener {
-                                    Log.d("db", "sucesso ao salvar os dados")
-                                    print("mensagem sucesso")
-                                }.addOnFailureListener{e ->
-                                    Log.w("db", "deu erro ao salvar os dados", e)
-                                }
+                            db.collection("usuarios").document(userId).set(usuariosMap)
                             Toast.makeText(this,"Logado no modo anônimo com sucesso!", LENGTH_SHORT).show()
                             iniciarMainActivity()
                         } else {
@@ -91,7 +75,6 @@ class LoginActivity : AppCompatActivity() {
                         }
                     }
             }
-
         }
 
         // Botão de logar com email
@@ -116,53 +99,67 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-
+    // Essa função vai iniciar uma activity dependendo se é gerente ou não. Vai resgatar o dado dentro do documento da pessoa
     private fun iniciarMainActivity() {
-        // Conferir se há pendência
-        //val userId = FirebaseAuth.getInstance().currentUser!!.uid
-
-        //CORRIGIR PENDENCIA (LOCAL DE LOCAÇÃO PENDENTE FOI MUDADO NO FIREBASE)
-
-        /*val docRef = db.collection("usuarios").document(userId)
-        docRef.get()
+        // Conferir se é um gerente
+        val userId = FirebaseAuth.getInstance().currentUser!!.uid
+        var usuarioGerente = "cliente"
+        db.collection("locação").document(userId)
+            .get()
             .addOnSuccessListener { document ->
-                if (document != null && document.exists()) {
-                    val existePendencia = document.data?.get("pendencia")
+                // Aqui estamos dentro do documento do usuário
+                usuarioGerente = document.getString("gerente") ?: "cliente"
+            }
 
-                    if (existePendencia == true) {
-                        val view = findViewById<View>(android.R.id.content)
-                        val snackbar = Snackbar.make(view, "Você possui um aluguel em andamento", Snackbar.LENGTH_INDEFINITE)
+        if (usuarioGerente == "gerente") {
+            // TODO: @Arthur preencher com a activity principal do gerente
+            val i = Intent(this, InicioActivity::class.java)
+            startActivity(i)
+        } else {
+            // Conferir se há pendência de locação pelo usuário
+            val docRef = db.collection("locacao").document(userId)
+            docRef.get()
+                .addOnSuccessListener { document ->
+                    if (document != null && document.exists()) {
+                        val existePendencia = document.data?.get("status")
 
-                        // Ação de um botão dentro da SnackBar
-                        snackbar.setAction("Recuperar", View.OnClickListener {
-                            val intent = Intent(this, GerarQRcodeActivity::class.java)
-                            startActivity(intent)
+                        if (existePendencia != "confirmado") {
+                            val view = findViewById<View>(android.R.id.content)
+                            val snackbar = Snackbar.make(view, "Você possui um aluguel em andamento", Snackbar.LENGTH_INDEFINITE)
 
-                            val updates = hashMapOf<String, Any>(
-                                "pendencia" to false
-                            )
+                            // Ação de um botão dentro da SnackBar
+                            snackbar.setAction("Recuperar", View.OnClickListener {
+                                val intent = Intent(this, GerarQRcodeActivity::class.java)
+                                startActivity(intent)
 
-                            // Remover a atual pendência
-                            db.collection("usuarios").document(userId).set(updates, SetOptions.merge())
-                        })
+                                val updates = hashMapOf<String, Any>(
+                                    "pendencia" to "confirmado"
+                                )
 
-                        snackbar.show()
-                    } else {
-                        val iniciarActivity = Intent(this, MapsActivity::class.java)
-                        startActivity(iniciarActivity)
-                        finish()
-                        Log.d(TAG, "Entrou aqui: $existePendencia")
+                                // Remover a atual pendência
+                                db.collection("locacao").document(userId).set(updates, SetOptions.merge())
+                            })
+
+                            snackbar.show()
+                        } else {
+                            // Não há pendência
+                            val iniciarActivity = Intent(this, MapsActivity::class.java)
+                            startActivity(iniciarActivity)
+                            finish()
+                            Log.d("Sessão de login", "Entrou aqui: $existePendencia")
+                        }
                     }
                 }
-            }
-            .addOnFailureListener {
-                val iniciarActivity = Intent(this, MapsActivity::class.java)
-                startActivity(iniciarActivity)
-                finish()
-                Log.d(TAG, "Entrou no erro")
-            }*/
+                .addOnFailureListener {
+                    val iniciarActivity = Intent(this, MapsActivity::class.java)
+                    startActivity(iniciarActivity)
+                    finish()
+                    Log.d("Sessão de login", "Entrou no erro, continuar para tela principal.")
+                }
+        }
     }
 
+    // Função que confere se o usuário está conectado à internet
     private fun isOnline(context: Context): Boolean {
         val connectivityManager =
             context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager

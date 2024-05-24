@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    tools:viewBindingIgnore="false"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ReleaseLockerActivity"
+    android:orientation="vertical">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/main_black">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppinsbold"
+            android:textColor="@color/white"
+            android:textAlignment="center"
+            android:text="CONFIRMAÇÃO" />
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="CONFIRME OS DADOS DA LOCAÇÃO"
+                android:textAlignment="center"
+                android:layout_marginBottom="40dp"
+                style="@style/mainTitle" />
+
+            <!-- Linha 1 de informações: Nome do Cliente  -->
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Cliente:"
+                    style="@style/infoHead" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/nomeCliente"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/infoBody"
+                    android:text="..." />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <!-- Linha 2 de informações: Nome da Unidade  -->
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Unidade:"
+                    style="@style/infoHead" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/nomeUnidade"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/infoBody"
+                    android:text="..." />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <!-- Linha 3 de informações: Número do Armário  -->
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Armário:"
+                    style="@style/infoHead" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/numArmario"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/infoBody"
+                    android:text="..." />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <!-- Linha 4 de informações: Nome do Cliente  -->
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tempo de utilização:"
+                    style="@style/infoHead" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tempoUtilizacao"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/infoBody"
+                    android:text="..." />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <!-- Botões -->
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnConfirmar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Confirmar locação"
+            android:layout_marginTop="45dp"
+            style="@style/btnPrimary" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnCancelar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Cancelar locação"
+            android:layout_marginTop="10dp"
+            style="@style/btnDanger" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</androidx.appcompat.widget.LinearLayoutCompat>

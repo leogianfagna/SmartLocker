@@ -123,31 +123,30 @@ class CadastroActivity : AppCompatActivity() {
         }
     }
 
-    private fun criarConta(nome: String, cpf:String, email: String, celular: String, dataNasc:String, senha:String, confSenha:String, it: View) {
-        lateinit var snackbar: Snackbar
+    private fun criarConta(nome: String, cpf: String, email: String, celular: String, dataNasc: String, senha: String, confSenha: String, it: View) {
         auth.createUserWithEmailAndPassword(email, senha)
-            .addOnCompleteListener{ cadastro ->
-                snackbar = Snackbar.make(it, "Conta criada", Snackbar.LENGTH_SHORT)
-                snackbar.show()
+            .addOnCompleteListener { cadastro ->
+                if (cadastro.isSuccessful) {
+                    Snackbar.make(it, "Conta criada", Snackbar.LENGTH_SHORT).show()
 
-                val usuariosMap = hashMapOf(
-                    "nome" to nome,
-                    "cpf" to cpf,
-                    "email" to email,
-                    "cel" to celular,
-                    "dataNasc" to dataNasc,
-                    "cartao" to false
-
-                )
+                    val usuariosMap = hashMapOf(
+                        "nome" to nome,
+                        "cpf" to cpf,
+                        "email" to email,
+                        "cel" to celular,
+                        "dataNasc" to dataNasc,
+                        "cartao" to false,
+                        "gerente" to false
+                    )
 
                 val userId = FirebaseAuth.getInstance().currentUser!!.uid
 
                 db.collection("usuarios").document(userId)
                     .set(usuariosMap).addOnSuccessListener {
-                        Log.d("db", "Dados salvos com sucesso!")
+                        Log.d("db", "sucesso ao salvar os dados")
                         print("mensagem sucesso")
                     }.addOnFailureListener{e ->
-                        Log.w("db", "Erro ao salvar os dados", e)
+                        Log.w("db", "deu erro ao salvar os dados", e)
                     }
             }.addOnFailureListener { excessao ->
                 snackbar = Snackbar.make(it, "Um erro incomum ocorreu!", Snackbar.LENGTH_SHORT)
