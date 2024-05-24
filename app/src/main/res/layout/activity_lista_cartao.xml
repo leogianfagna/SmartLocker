@@ -107,9 +107,14 @@
             android:layout_height="wrap_content"
             android:text="Adicionar um cartão"
             style="@style/btnPrimary"
-            app:layout_constraintStart_toStartOf="@+id/infoCartao2"
-            app:layout_constraintTop_toBottomOf="@+id/infoCartao2"
-            app:layout_constraintEnd_toEndOf="@+id/infoCartao2"/>
+            android:layout_marginBottom="10dp"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_Voltar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Voltar"
+            style="@style/btnSecundary" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 
