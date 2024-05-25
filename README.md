@@ -10,15 +10,9 @@ Informações sobre esse projeto.
 Esse projeto cria uma aplicação em Android utilizando banco de dados Firebase Firestore que consiste em usuários poderem reservar armários em estabelecimentos pré definidos, que podem ser buscados através de um mapa dentro do aplicativo em uma interface interativa e amigável.
 
 ### Como usar
-Este projeto está em desenvolvimento e sua primeira entrega ainda é baseada no emulador da plataforma Android Studio.
-1. Clone o repositório utilizando a plataforma Android Studio
-   1. Para isso, inicie um novo projeto
-   2. Escolha a opção "Get from VCS"
-   3. Use a opção GitHub
-   4. Escolha esse repositório
-2. Execute a build: use o botão "run" para iniciar e emular o aplicativo
+Dentro da última release, instale o arquivo .apk disponibilizado em `/app/release`.
 
-🟠 **Modo administrativo:** Este módulo ainda não foi desenvolvido! A entrada atual consiste apenas no modo cliente.
+🟠 **Modo administrativo:** Parte do aplicativo que gerencia os armários. Pode ser acessado apenas ao realizar um login com uma conta que foi marcada como GERENTE no banco de dados.
 
 🟢 **Modo cliente:** O aplicativo exige que você autentique-se. Você pode optar por usar o modo anônimo ou criar um conta. Se você já possuir uma, pode se logar normalmente usando suas credenciais. O controle de contas é feito através do Firebase Authentication. Depois disso, é exibido os possíveis armários próximos a sua região. Escolha um deles, amplie as opções, selecione o tempo total e confirme a locação. O aplicativo já controla se ainda há armários disponíveis em cada unidade. Um QR Code aparece na tela que simboliza a hora de mostrar ao gerente. Para que você possa entrar nesse processo, você precisa cadastrar um cartão logo após o seu cadastro.
 
