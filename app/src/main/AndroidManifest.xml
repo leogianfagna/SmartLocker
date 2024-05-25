@@ -33,6 +33,15 @@
         android:theme="@style/Theme.smartlocker"
         tools:targetApi="33">
         <activity
+            android:name=".GerenteInicioActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ArmarioRentedActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ArmarioAbertoActivity"
+            android:exported="false" />
+        <activity
             android:name=".ListaCartaoActivity"
             android:exported="false" />
         <activity

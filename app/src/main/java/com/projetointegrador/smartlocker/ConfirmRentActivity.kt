@@ -10,6 +10,7 @@ import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.projetointegrador.smartlocker.databinding.ActivityConfirmRentBinding
@@ -92,7 +93,9 @@ class ConfirmRentActivity : AppCompatActivity() {
                 }
 
             alertDialog.dismiss()
-            // TODO: Ir para a tela de locação confirmada
+            val intent = Intent(this, ArmarioRentedActivity::class.java).apply {
+                putExtra("LOCACAO_ID", "Sua string aqui")
+            }
         }
 
         dialogView.findViewById<Button>(R.id.btnNao).setOnClickListener {
@@ -110,13 +113,19 @@ class ConfirmRentActivity : AppCompatActivity() {
             .create()
 
         dialogView.findViewById<Button>(R.id.btnSim).setOnClickListener {
-            /* TODO: Voltar para a activity depois de cancelar @Arthur
-            val voltarActivityPrincipalGerente = Intent(this, ScanQRcodeActivity::class.java)
-            startActivity(voltarActivityPrincipalGerente)
-            finish()
-            */
-            alertDialog.dismiss()
 
+            val userId = FirebaseAuth.getInstance().currentUser!!.uid
+            val docRef = Firebase.firestore.collection("usuarios").document(userId)
+            docRef.get()
+                .addOnSuccessListener { document -> val unidadeGerente = document.getString("unidade")
+            val intent = Intent(this, GerenteInicioActivity::class.java).apply {
+                putExtra("UNIDADE_GERENTE", unidadeGerente)
+            }
+            startActivity(intent)
+            finish()
+
+            alertDialog.dismiss()
+                }
         }
 
         dialogView.findViewById<Button>(R.id.btnNao).setOnClickListener {
