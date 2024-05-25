@@ -98,7 +98,7 @@ class OpenLockerActivity : AppCompatActivity() {
             alertDialog.dismiss()
 
             val intent = Intent(this,ArmarioAbertoActivity::class.java).apply {
-                putExtra("LOCACAO_ID", "Sua string aqui")
+                putExtra("LOCACAO_ID", FirebaseAuth.getInstance().currentUser!!.uid)
             }
             startActivity(intent)
             finish()

@@ -94,7 +94,7 @@ class ConfirmRentActivity : AppCompatActivity() {
 
             alertDialog.dismiss()
             val intent = Intent(this, ArmarioRentedActivity::class.java).apply {
-                putExtra("LOCACAO_ID", "Sua string aqui")
+                putExtra("LOCACAO_ID", FirebaseAuth.getInstance().currentUser!!.uid)
             }
         }
 
