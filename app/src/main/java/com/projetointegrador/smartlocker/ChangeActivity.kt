@@ -226,12 +226,22 @@ class ChangeActivity : AppCompatActivity() {
                 .addOnFailureListener { e ->
                     Toast.makeText(this, "Erro ao adicionar cartão", Toast.LENGTH_SHORT).show()
                 }
+            val activity = Intent(this, ListaCartaoActivity::class.java)
+            startActivity(activity)
+            finish()
+        }
+
+
+        binding.cancelarAdd.setOnClickListener {
+            val activity = Intent(this, ListaCartaoActivity::class.java)
+            startActivity(activity)
+            finish()
         }
     }
 
     override fun onStop() {
         super.onStop()
-        val i = Intent(this, InicioActivity::class.java)
+        val i = Intent(this, ListaCartaoActivity::class.java)
         startActivity(i)
         finish()
     }

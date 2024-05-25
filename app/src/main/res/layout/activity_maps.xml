@@ -50,12 +50,12 @@
             </ScrollView>
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/btnMapsFinalizarSessao"
+                android:id="@+id/addCard"
                 style="@style/btnHyperLink"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:text="Voltar" />
+                android:text="Gerenciar cartões" />
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 

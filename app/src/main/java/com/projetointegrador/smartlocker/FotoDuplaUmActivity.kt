@@ -37,21 +37,13 @@ class FotoDuplaUmActivity : AppCompatActivity() {
             binding.imageViewLocatario.setImageBitmap(myBitmap)
         }
 
-        binding.btnContinue.setOnClickListener {
-            val activity = Intent(this, CamPreviewActivity::class.java)
-            startActivity(activity)
-            finish()
-        }
-
-
         binding.btnOutraFoto.setOnClickListener {
             val activity = Intent(this, CamPreviewActivity::class.java)
             startActivity(activity)
             finish()
         }
 
-
-        binding.btnVoltar.setOnClickListener {
+        binding.btnContinue.setOnClickListener {
             val activity = Intent(this, CamPreviewActivity::class.java)
             startActivity(activity)
             finish()
