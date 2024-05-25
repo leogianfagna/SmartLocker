@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.NFC" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
@@ -32,6 +33,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.smartlocker"
         tools:targetApi="33">
+        <activity
+            android:name=".LerNfcActivity"
+            android:exported="false" />
+        <activity
+            android:name=".DesvincularNfcActivity"
+            android:exported="false" />
+        <activity
+            android:name=".VincularNfcActivity"
+            android:exported="false" />
         <activity
             android:name=".ListaCartaoActivity"
             android:exported="false" />
