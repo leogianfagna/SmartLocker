@@ -1,6 +1,7 @@
 package com.projetointegrador.smartlocker
 
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
@@ -8,6 +9,7 @@ import android.view.LayoutInflater
 import android.widget.Button
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.projetointegrador.smartlocker.databinding.ActivityOpenLockerBinding
@@ -68,7 +70,19 @@ class OpenLockerActivity : AppCompatActivity() {
         }
 
         binding.btnVoltar.setOnClickListener {
-            // TODO: Direcionar para a activity 2 (inicial do gerente @arthur)
+
+            val userId = FirebaseAuth.getInstance().currentUser!!.uid
+            val docRef = Firebase.firestore.collection("usuarios").document(userId)
+            docRef.get()
+                .addOnSuccessListener { document -> val unidadeGerente = document.getString("unidade")
+                    val intent = Intent(this, GerenteInicioActivity::class.java).apply {
+                        putExtra("UNIDADE_GERENTE", unidadeGerente)
+                    }
+                    startActivity(intent)
+                    finish()
+
+                }
+
         }
     }
 
@@ -82,7 +96,12 @@ class OpenLockerActivity : AppCompatActivity() {
         // Abre o armário temporariamente
         dialogView.findViewById<Button>(R.id.btnSim).setOnClickListener {
             alertDialog.dismiss()
-            // TODO: Avançar para a activity 15 (armário aberto @arthur)
+
+            val intent = Intent(this,ArmarioAbertoActivity::class.java).apply {
+                putExtra("LOCACAO_ID", FirebaseAuth.getInstance().currentUser!!.uid)
+            }
+            startActivity(intent)
+            finish()
         }
 
         dialogView.findViewById<Button>(R.id.btnNao).setOnClickListener {

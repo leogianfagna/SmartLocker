@@ -9,8 +9,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.room.util.findColumnIndexBySuffix
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.ktx.Firebase
 import com.projetointegrador.smartlocker.databinding.FragmentUnidadeInfoBinding
 import kotlinx.coroutines.tasks.await
 
@@ -51,6 +53,7 @@ class UnidadeInfoFragment : Fragment() {
         binding.btnBeginRent.setOnClickListener {
             // Todo: COLOCAR ALGUM CHECK PRA VER SE O USUÁRIO JA TEM UM ALUGUEL
 
+            possuiAluguelEfetivo()
             possuiCartaoCadastrado(nomeUnidade)
 
 
@@ -60,6 +63,25 @@ class UnidadeInfoFragment : Fragment() {
             requireActivity().supportFragmentManager.beginTransaction().remove(this).commit()
         }
     }
+
+    private fun possuiAluguelEfetivo() {
+
+        val userId = FirebaseAuth.getInstance().currentUser!!.uid
+        val docRef = firestore.collection("locacao").document(userId)
+
+        docRef.get()
+            .addOnSuccessListener { document ->
+                if (document != null && document.exists()) {
+                    // O documento existe, o usuário está alugando um armário
+
+                } else {
+                    // O documento não existe, o usuário não está alugando um armário
+                    activity?.let{
+                        val intent = Intent(it, ChangeActivity::class.java)
+                        it.startActivity(intent)
+                }
+    }}}
+
     private fun possuiCartaoCadastrado( nomeUnidade: String){
 
         val idDoUsuarioAutenticado = FirebaseAuth.getInstance().currentUser!!.uid

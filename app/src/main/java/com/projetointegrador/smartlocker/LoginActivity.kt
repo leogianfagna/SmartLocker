@@ -103,18 +103,25 @@ class LoginActivity : AppCompatActivity() {
     private fun iniciarMainActivity() {
         // Conferir se é um gerente
         val userId = FirebaseAuth.getInstance().currentUser!!.uid
-        var usuarioGerente = "cliente"
-        db.collection("locação").document(userId)
+        var usuarioGerente: Boolean? = false
+        db.collection("usuarios").document(userId)
             .get()
             .addOnSuccessListener { document ->
                 // Aqui estamos dentro do documento do usuário
-                usuarioGerente = document.getString("gerente") ?: "cliente"
+                usuarioGerente = document.getBoolean("gerente")
             }
 
-        if (usuarioGerente == "gerente") {
-            // TODO: @Arthur preencher com a activity principal do gerente
-            val i = Intent(this, InicioActivity::class.java)
-            startActivity(i)
+        if (usuarioGerente == true) {
+            val userId = FirebaseAuth.getInstance().currentUser!!.uid
+            val docRef = Firebase.firestore.collection("usuarios").document(userId)
+            docRef.get()
+                .addOnSuccessListener { document -> val unidadeGerente = document.getString("unidade")
+                    val intent = Intent(this, GerenteInicioActivity::class.java).apply {
+                        putExtra("UNIDADE_GERENTE", unidadeGerente)
+                    }
+                    startActivity(intent)
+                    finish()
+                }
         } else {
             // Conferir se há pendência de locação pelo usuário
             val docRef = db.collection("locacao").document(userId)
