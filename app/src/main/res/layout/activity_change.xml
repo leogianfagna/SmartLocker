@@ -127,6 +127,7 @@
     </androidx.appcompat.widget.LinearLayoutCompat>
 
     <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/cancelarAdd"
         style="@style/btnHyperLink"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

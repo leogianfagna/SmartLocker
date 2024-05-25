@@ -1,5 +1,6 @@
 package com.projetointegrador.smartlocker
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -33,6 +34,12 @@ class ListaCartaoActivity : AppCompatActivity() {
         binding.recyclerView.layoutManager = LinearLayoutManager(this)
 
         getCardsFromFirestore()
+
+        binding.btnVoltar.setOnClickListener {
+            val activity = Intent(this, MapsActivity::class.java)
+            startActivity(activity)
+            finish()
+        }
     }
 
     fun getCardsFromFirestore() {
@@ -57,5 +64,8 @@ class ListaCartaoActivity : AppCompatActivity() {
             .addOnFailureListener { exception ->
                 Log.w(TAG, "Erro ao receber documentos", exception)
             }
+        val activity = Intent(this, ChangeActivity::class.java)
+        startActivity(activity)
+        finish()
     }
 }

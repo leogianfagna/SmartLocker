@@ -1,5 +1,6 @@
 package com.projetointegrador.smartlocker
 
+import android.content.Intent
 import android.graphics.BitmapFactory
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
@@ -34,6 +35,12 @@ class FotoUnicaActivity : AppCompatActivity() {
         if(imageFile.exists()){
             val myBitmap = BitmapFactory.decodeFile(imageFile.absolutePath)
             binding.imageViewLocatario.setImageBitmap(myBitmap)
+        }
+
+        binding.btnOutraFoto.setOnClickListener {
+            val activity = Intent(this, CamPreviewActivity::class.java)
+            startActivity(activity)
+            finish()
         }
     }
 }

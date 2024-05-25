@@ -37,3 +37,5 @@ class ConfirmarUmClienteActivity : AppCompatActivity() {
         }
     }
 }
+
+//TODO @Arthur linkar com a activity de liberar armário
