@@ -31,6 +31,7 @@ import com.google.firebase.Firebase
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.GeoPoint
 import com.google.firebase.firestore.firestore
+import com.projetointegrador.smartlocker.databinding.ActivityMapsBinding
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
@@ -39,12 +40,15 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     private val LOCATION_PERMISSION_REQUEST_CODE = 1
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private lateinit var firestore: FirebaseFirestore
+    private lateinit var binding: ActivityMapsBinding
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_maps)
+
+        binding = ActivityMapsBinding.inflate(layoutInflater)
 
         firestore = FirebaseFirestore.getInstance()
 
@@ -66,6 +70,12 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
+        }
+
+        binding.addCard.setOnClickListener {
+            val activity = Intent(this, ListaCartaoActivity::class.java)
+            startActivity(activity)
+            finish()
         }
     }
 
